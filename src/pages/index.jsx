@@ -41,13 +41,12 @@ export default function Home() {
         </div>
       </div>
 
-      <div className="section-2 bg-c3 flex justify-evenly text-center flex-col min-h-[100px] items-center font-semibold">
+      <div className="section-2 bg-c3 flex justify-evenly text-center flex-wrap min-h-[100px] items-center font-semibold">
         <div>
           <h1>4.5</h1>
           <p>80k Reviews</p>
         </div>
         <span className="w-[1.5px] h-[30px] bg-c2 "></span>
-        {/* <span className="w-[30px] h-[30px] bg-c2"></span> */}
         <div>
           <h1>30M</h1>
           <p>Enrollments</p>
