@@ -1,7 +1,6 @@
 import Image from "next/image";
 import { Inter } from "next/font/google";
 import Navbar from "@/components/Navbar";
-import Wrapper from "@/components/wrapper";
 import { FaArrowTrendUp } from "react-icons/fa6";
 const inter = Inter({ subsets: ["latin"] });
 
