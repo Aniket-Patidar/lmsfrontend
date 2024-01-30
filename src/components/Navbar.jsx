@@ -1,6 +1,6 @@
 import Link from "next/link";
 import React from "react";
-
+import { RxHamburgerMenu } from "react-icons/rx";
 const Navbar = () => {
   return (
     <>
@@ -25,11 +25,12 @@ const Navbar = () => {
           <Link href="#">Blog</Link>
           <Link href="#">Course</Link>
         </div>
-        <div className="flex gap-[4px] hidden">
-          <button>Log In</button>
-          <button className="bg-c2 text-white text-sm  text-[12px] px-2 py-1 rounded-full">
+        <div className="flex gap-[4px] ">
+          <button className="hidden">Log In</button>
+          <button className="bg-c2 hidden text-white text-sm  text-[12px] px-2 py-1 rounded-full">
             Sign Up
           </button>
+          <RxHamburgerMenu />
         </div>
       </div>
     </>
