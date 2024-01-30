@@ -33,7 +33,7 @@ export default function Home() {
             </button>
           </div>
         </div>
-        <div className="mx-auto flex items-center justify-center">
+        <div className="mx-auto flex items-center justify-center mt-[10px] md:mt-0">
           <img src="./2.png" alt="" />
         </div>
       </div>

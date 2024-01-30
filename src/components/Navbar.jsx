@@ -25,7 +25,7 @@ const Navbar = () => {
           <Link href="#">Blog</Link>
           <Link href="#">Course</Link>
         </div>
-        <div className="flex gap-[4px]">
+        <div className="flex gap-[4px] hidden">
           <button>Log In</button>
           <button className="bg-c2 text-white text-sm  text-[12px] px-2 py-1 rounded-full">
             Sign Up
