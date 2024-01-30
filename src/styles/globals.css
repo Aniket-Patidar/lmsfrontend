@@ -28,3 +28,7 @@ body {
 .f3 {
   font-family: 'Open Sans', sans-serif;
 }
+
+::-webkit-scrollbar {
+  display: none;
+}
