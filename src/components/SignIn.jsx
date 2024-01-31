@@ -1,7 +1,7 @@
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import { FaGoogle } from "react-icons/fa";
-const SignIn = () => {
+const SignIn = ({ setSign }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [username, setUsername] = useState("");
@@ -42,7 +42,8 @@ const SignIn = () => {
     }
 
     setErr({});
-    console.log({ email, password ,username});
+    setSign(false);
+    console.log({ email, password, username });
   }
 
   return (

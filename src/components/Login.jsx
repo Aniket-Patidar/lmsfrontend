@@ -1,14 +1,14 @@
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import { FaGoogle } from "react-icons/fa";
-const Login = () => {
+const Login = ({ setLogin }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [err, setErr] = useState({});
 
   useEffect(() => {
     setErr({});
-  }, [setEmail, setPassword]);
+  }, [email, password]);
 
   function handelLogin() {
     if (email === "" && password === "") {
@@ -36,6 +36,7 @@ const Login = () => {
     }
 
     setErr({});
+    setLogin(false);
     console.log({ email, password });
   }
 
@@ -43,9 +44,9 @@ const Login = () => {
     <div className="bg-white fixed px-[20px]  rounded-lg  py-[20px] top-[50%] left-[50%] -translate-x-[50%] -translate-y-[50%]">
       <p className="font-semibold text-lg text-center my-2">Easy Learning</p>
       <button className="border-[.5px] whitespace-normal px-[70px] py-1 text-md  border-black flex items-center gap-2">
-          <FaGoogle />
-          <p className="whitespace-nowrap">Login With Google</p>
-        </button>
+        <FaGoogle />
+        <p className="whitespace-nowrap">Login With Google</p>
+      </button>
 
       <div className="flex items-center justify-center">
         <span className="w-[40%] h-[1px] bg-c2"></span>

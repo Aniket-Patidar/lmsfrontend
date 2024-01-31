@@ -20,8 +20,8 @@ export default function Home() {
       <Navbar setSign={setSign} setLogin={setLogin} />
       <div className="relative">
         <Main></Main>
-        {login && <Login></Login>}
-        {sign && <SignIn></SignIn>}
+        {login && <Login setLogin={setLogin}></Login>}
+        {sign && <SignIn setSign={setSign}></SignIn>}
       </div>
 
       <Ratings></Ratings>
