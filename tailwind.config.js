@@ -11,6 +11,7 @@ module.exports = {
         'c1': '#FBC366',
         'c2': '#1F1F1F',
         'c3': '#FFF6E5',
+        'c4': '#FAF1E1'
       },
     },
   },
