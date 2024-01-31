@@ -93,8 +93,9 @@ export default function Home() {
         </div>
       </div>
 
-      <div className="section4 px-5 pt-[10px] md:px-[15vw] md:pt-[31px] flex flex-wrap gap-[2vw]  items-center justify-center md:justify-start   bg-white">
-        <div className="card md:w-[50%] md:m-h-[450px] w-fit  h-fit p-[45px]  text-left text-white bg-c2 capitalize rounded-lg">
+      <div className="section4 px-5 p-[10px] md:px-[15vw] md:pt-[31px] flex flex-wrap gap-[2vw]  items-center justify-center md:justify-start   bg-white">
+      
+        <div className="card w-[180px] h-[190px] p-[20px] md:w-[50%] md:h-[220px]  md:p-[40px] md:px-[20px] md:py-2     text-left text-white bg-c2 capitalize rounded-lg">
           <h1 className="md:text-[2vw] text-lg ">
             Our <span className="font-serif  text-c1">feature</span> <br />{" "}
             special for you
@@ -107,8 +108,8 @@ export default function Home() {
           </button>
         </div>
 
-        <div className="card w-[220px] h-fit px-[20px] py-2  bg-c3">
-          <img src="./i1.png" className="w-[100px]" alt="" />
+        <div className="card w-[180px] h-fit px-[20px] py-2  bg-c3">
+          <img src="./i1.png" className="w-[72px] md:w-[100px] " alt="" />
           <p className="capitalize text-md font-semibold">get certificate</p>
           <p className="text-sm opacity-[.8]">
             Lorem ipsum, dolor sit amet consectetur adipisicing elit. Possimus,
@@ -116,8 +117,8 @@ export default function Home() {
           </p>
         </div>
 
-        <div className="card w-[220px] h-fit px-[20px] py-2  bg-c3">
-          <img src="./i2.png" className="w-[100px]" alt="" />
+        <div className="card w-[180px] h-fit px-[20px] py-2  bg-c3">
+          <img src="./i2.png" className="w-[72px] md:w-[100px] " alt="" />
           <p className="capitalize text-md font-semibold">get certificate</p>
           <p className="text-sm opacity-[.8]">
             Lorem ipsum, dolor sit amet consectetur adipisicing elit. Possimus,
@@ -125,8 +126,8 @@ export default function Home() {
           </p>
         </div>
 
-        <div className="card w-[220px] h-fit px-[20px] py-2  bg-c3">
-          <img src="./i3.png" className="w-[100px]" alt="" />
+        <div className="card w-[180px] h-fit px-[20px] py-2  bg-c3">
+          <img src="./i3.png" className="w-[72px] md:w-[100px] " alt="" />
           <p className="capitalize text-md font-semibold">get certificate</p>
           <p className="text-sm opacity-[.8]">
             Lorem ipsum, dolor sit amet consectetur adipisicing elit. Possimus,
@@ -134,8 +135,8 @@ export default function Home() {
           </p>
         </div>
 
-        <div className="card w-[220px] h-fit px-[20px] py-2  bg-c3">
-          <img src="./i1.png" className="w-[100px]" alt="" />
+        <div className="card w-[180px] h-fit px-[20px] py-2  bg-c3">
+          <img src="./i1.png" className="w-[72px] md:w-[100px] " alt="" />
           <p className="capitalize text-md font-semibold">get certificate</p>
           <p className="text-sm opacity-[.8]">
             Lorem ipsum, dolor sit amet consectetur adipisicing elit. Possimus,
@@ -143,8 +144,67 @@ export default function Home() {
           </p>
         </div>
 
+      </div>
+
+      <div className="section5 bg-c2 min-h-[50vh]  py-[15px] px-5 pt-[10px] md:px-[120px] md:pt-[31px] text-white">
+       
+        <h1 className="text-center text-4xl capitalize mb-[20px]">
+          Popular{" "}
+          <span className="border-red-500 px-2 rounded-full text-center text-c1 font-serif w-fit">
+            course
+          </span>
+        </h1>
       
-        
+       <div className="flex flex-col  md:flex-row justify-center gap-[2vw]">
+      
+       <div className="bg-[#dadada] mx-auto md:m-0 max-w-[300px]  text-black w-fit py-[15px] px-3 rounded-md">
+          <img className="w-[35vw] md:w-[12vw] mx-auto" src="./3.png" alt="" />
+          <div className="flex justify-between text-[10px]">
+            <div>4.5</div>
+            <div>02:33:45</div>
+          </div>
+
+          <h1 className="text-md font-semibold ">Learn english Spoken</h1>
+          <p className="text-sm opacity-[.5]">
+            Lorem ipsum dolor sit amet ipsum dolor sit amet .
+          </p>
+          <button className="text-sm font-serif border border-black px-3 py-2 mt-5 rounded-full">
+            View Course
+          </button>
+        </div>
+
+        <div className="bg-[#dadada] mx-auto md:m-0 max-w-[300px]  text-black w-fit py-[15px] px-3 rounded-md">
+          <img className="w-[35vw] md:w-[12vw] mx-auto" src="./4.png" alt="" />
+          <div className="flex justify-between text-[10px]">
+            <div>4.5</div>
+            <div>02:33:45</div>
+          </div>
+
+          <h1 className="text-md font-semibold ">Learn english Spoken</h1>
+          <p className="text-sm opacity-[.5]">
+            Lorem ipsum dolor sit amet ipsum dolor sit amet .
+          </p>
+          <button className="text-sm font-serif border border-black px-3 py-2 mt-5 rounded-full">
+            View Course
+          </button>
+        </div>
+
+        <div className="bg-[#dadada] mx-auto md:m-0 max-w-[300px]  text-black w-fit py-[15px] px-3 rounded-md">
+          <img className="w-[35vw] md:w-[12vw] mx-auto" src="./5.png" alt="" />
+          <div className="flex justify-between text-[10px]">
+            <div>4.5</div>
+            <div>02:33:45</div>
+          </div>
+
+          <h1 className="text-md font-semibold ">Learn english Spoken</h1>
+          <p className="text-sm opacity-[.5]">
+            Lorem ipsum dolor sit amet ipsum dolor sit amet .
+          </p>
+          <button className="text-sm font-serif border border-black px-3 py-2 mt-5 rounded-full">
+            View Course
+          </button>
+        </div>
+       </div>
       </div>
     </div>
   );
