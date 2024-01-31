@@ -23,7 +23,6 @@ export default function Home() {
         {login && <Login setLogin={setLogin}></Login>}
         {sign && <SignIn setSign={setSign}></SignIn>}
       </div>
-
       <Ratings></Ratings>
       <Feature></Feature>
       <Courses></Courses>

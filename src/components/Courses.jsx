@@ -2,7 +2,9 @@ import React from "react";
 import { FaArrowTrendUp } from "react-icons/fa6";
 import { FaStar } from "react-icons/fa6";
 import { FaClock } from "react-icons/fa";
+import { useRouter } from "next/router";
 const Courses = () => {
+  const router = useRouter();
   return (
     <>
       {" "}
@@ -36,7 +38,10 @@ const Courses = () => {
             <p className="text-sm opacity-[.5]">
               Lorem ipsum dolor sit amet ipsum dolor sit amet .
             </p>
-            <button className="text-sm font-serif border border-black px-3 py-2 mt-5 rounded-full">
+            <button
+              className="text-sm font-serif border border-black px-3 py-2 mt-5 rounded-full"
+              onClick={() => router.push("/courseDetails/1")}
+            >
               View Course
             </button>
           </div>
@@ -62,7 +67,10 @@ const Courses = () => {
             <p className="text-sm opacity-[.5]">
               Lorem ipsum dolor sit amet ipsum dolor sit amet .
             </p>
-            <button className="text-sm font-serif border border-black px-3 py-2 mt-5 rounded-full">
+            <button
+              onClick={() => router.push("/courseDetails/1")}
+              className="text-sm font-serif border border-black px-3 py-2 mt-5 rounded-full"
+            >
               View Course
             </button>
           </div>
@@ -88,7 +96,10 @@ const Courses = () => {
             <p className="text-sm opacity-[.5]">
               Lorem ipsum dolor sit amet ipsum dolor sit amet .
             </p>
-            <button className="text-sm font-serif border border-black px-3 py-2 mt-5 rounded-full">
+            <button
+              onClick={() => router.push("/courseDetails/1")}
+              className="text-sm font-serif border border-black px-3 py-2 mt-5 rounded-full"
+            >
               View Course
             </button>
           </div>
