@@ -5,9 +5,10 @@ import { FaArrowTrendUp } from "react-icons/fa6";
 const inter = Inter({ subsets: ["latin"] });
 import { FaStar } from "react-icons/fa6";
 import { FaClock } from "react-icons/fa";
+import { TfiHandPointRight } from "react-icons/tfi";
 export default function Home() {
   return (
-    <div className="min-h-100vh bg-c3">
+    <div className="bg-c3">
       <div className=" bg-c1 h-fit w-[100vw] px-5 pt-[10px] md:px-[120px] md:pt-[31px] overflow-hidden">
         <Navbar />
         <div className="main">
@@ -148,7 +149,7 @@ export default function Home() {
       <div className="section5 bg-c2 min-h-[50vh]  py-[15px] px-5 pt-[10px] md:px-[120px] md:pt-[31px] text-white">
         <h1 className="text-center text-4xl capitalize mb-[20px]">
           Popular{" "}
-          <span className="border-red-500 px-2 rounded-full text-center text-c1 font-serif w-fit">
+          <span className="border border-c1 px-2 rounded-full text-center text-c1 font-serif w-fit">
             course
           </span>
         </h1>
@@ -186,7 +187,7 @@ export default function Home() {
               src="./4.png"
               alt=""
             />
-              <div className="flex justify-between text-[10px]">
+            <div className="flex justify-between text-[10px]">
               <div className="flex items-center gap-1">
                 <FaStar className="text-c1" />
                 <p>4.5</p>
@@ -196,7 +197,6 @@ export default function Home() {
                 <p> 02:33:45</p>
               </div>
             </div>
-
 
             <h1 className="text-md font-semibold ">Learn english Spoken</h1>
             <p className="text-sm opacity-[.5]">
@@ -213,7 +213,7 @@ export default function Home() {
               src="./5.png"
               alt=""
             />
-                 <div className="flex justify-between text-[10px]">
+            <div className="flex justify-between text-[10px]">
               <div className="flex items-center gap-1">
                 <FaStar className="text-c1" />
                 <p>4.5</p>
@@ -224,7 +224,6 @@ export default function Home() {
               </div>
             </div>
 
-
             <h1 className="text-md font-semibold ">Learn english Spoken</h1>
             <p className="text-sm opacity-[.5]">
               Lorem ipsum dolor sit amet ipsum dolor sit amet .
@@ -233,6 +232,38 @@ export default function Home() {
               View Course
             </button>
           </div>
+        </div>
+      </div>
+
+      <div className="section6 py-[15px] px-5 pt-[10px] md:px-[120px] md:pt-[31px] flex flex-col  md:flex-row items-center justify-center">
+        <div className="md:w-[50%] w-full "> 
+          <h1 className="font-extrabold  md:inline-block md:font-semibold md:text-[3vw] capitalize text-center md:text-left text-4xl mb-2">
+            its easy to start <br className="hidden md:inline" />
+            <span className="text-c1 font-serif border border-c1 rounded-full px-2 py-1 md:border-0 md:px-0 md:py-0">Learning</span>
+          </h1>
+
+          <p className="opacity-[.8] text-md md:text-sm  md:w-1/2 mb-2">
+            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Repellat
+            veniam aspernatur consequuntur quis deleniti accusantium eius
+            repudiandae fugit adipisci quidem.
+          </p>
+          <ol>
+            <li className="text-sm font-semibold flex items-center gap-1">
+              <TfiHandPointRight />
+              <span className="">Create Account</span>
+            </li>
+            <li className="text-sm font-semibold flex items-center gap-1">
+              <TfiHandPointRight />
+              <span>Purchase lesson</span>
+            </li>
+            <li className="text-sm font-semibold flex items-center gap-1">
+              <TfiHandPointRight />
+              <span>Start Learning</span>
+            </li>
+          </ol>
+        </div>
+        <div className="md:w-[50%] w-full">
+          <img src="./6.png" className="w-[55vw] md:w-[25vw] mx-auto " alt="" />
         </div>
       </div>
     </div>
