@@ -9,14 +9,13 @@ export default function Home() {
     <div className="min-h-100vh bg-c3">
       <div className=" bg-c1 h-fit w-[100vw] px-5 pt-[10px] md:px-[120px] md:pt-[31px] overflow-hidden">
         <Navbar />
-        {/* main */}
         <div className="main">
           <div className="flex flex-col gap-[20px] md:flex-row justify-evenly w-full mt-[50px] items-center">
             <div className="md:w-[50%]">
               <h1 className="font-extrabold md:font-semibold md:text-[4vw]">
                 {" "}
                 Improve your <br className="hidden md:inline" />{" "}
-                <span className="bg-c2 px-3 font-serif capitalize py-0 items-center text-center inline-flex items-center w-fit rounded-full text-white font-extralight">
+                <span className="bg-c2 px-3 font-serif capitalize items-center text-center inline-flex  w-fit rounded-full text-white">
                   skills
                 </span>{" "}
                 fast
@@ -41,7 +40,7 @@ export default function Home() {
         </div>
       </div>
 
-      <div className="section-2 bg-c3 flex justify-evenly text-center flex-wrap min-h-[200px] items-center font-semibold">
+      <div className="section-2 bg-c3 flex justify-evenly text-center md:px-[15vw] flex-wrap min-h-[200px] items-center font-semibold">
         <div>
           <h1>4.5</h1>
           <p>80k Reviews</p>
@@ -63,7 +62,7 @@ export default function Home() {
         </div>
       </div>
 
-      <div className="section3 bg-c4  py-[15px] flex flex-col md:flex-row   items-center justify-center  gap-[3vw]">
+      <div className="section3 bg-c4  py-[15px] flex flex-col md:flex-row  md:px-[15vw] items-center justify-center  gap-[8vw]">
         <h1 className="font-extrabold  md:font-semibold md:text-[3vw] text-center text-lg md:hidden ">
           we Provider <br className="hidden md:inline" />
           <span className="bg-c2 px-3 font-serif capitalize  text-lg text-center inline-flex items-center w-fit rounded-full text-white ">
@@ -75,11 +74,11 @@ export default function Home() {
         <div className="md:-[50%] flex items-center justify-end">
           <img src="./1.png" alt="" />
         </div>
-        <div className="capitalize  md:w-[30%] md:pr-[0vw]">
+        <div className="capitalize  md:w-[40%] md:pr-[0vw]">
           <h1 className="font-extrabold hidden md:inline-block md:font-semibold md:text-[3vw]">
             {" "}
             we Provider <br className="hidden md:inline" />{" "}
-            <span className="bg-c2 px-3 font-serif capitalize py-0 items-center text-center inline-flex items-center w-fit rounded-full text-white font-extralight">
+            <span className="bg-c2 px-3 font-serif capitalize py-0  text-center inline-flex items-center w-fit rounded-full text-white font-extralight">
               smart
             </span>{" "}
             online <br />
@@ -92,6 +91,60 @@ export default function Home() {
             temporibus! Vel, provident magnam?
           </p>
         </div>
+      </div>
+
+      <div className="section4 px-5 pt-[10px] md:px-[15vw] md:pt-[31px] flex flex-wrap gap-[2vw]  items-center justify-center md:justify-start   bg-white">
+        <div className="card md:w-[50%] md:m-h-[450px] w-fit  h-fit p-[45px]  text-left text-white bg-c2 capitalize rounded-lg">
+          <h1 className="md:text-[2vw] text-lg ">
+            Our <span className="font-serif  text-c1">feature</span> <br />{" "}
+            special for you
+          </h1>
+          <button className="md:text-[1vw] text-[8px] bg-c1 px-3 py-2 rounded-full mt-5 flex items-center gap-1 text-black">
+            <span>See All feature</span>{" "}
+            <span>
+              <FaArrowTrendUp></FaArrowTrendUp>
+            </span>
+          </button>
+        </div>
+
+        <div className="card w-[220px] h-fit px-[20px] py-2  bg-c3">
+          <img src="./i1.png" className="w-[100px]" alt="" />
+          <p className="capitalize text-md font-semibold">get certificate</p>
+          <p className="text-sm opacity-[.8]">
+            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Possimus,
+            suscipit?
+          </p>
+        </div>
+
+        <div className="card w-[220px] h-fit px-[20px] py-2  bg-c3">
+          <img src="./i2.png" className="w-[100px]" alt="" />
+          <p className="capitalize text-md font-semibold">get certificate</p>
+          <p className="text-sm opacity-[.8]">
+            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Possimus,
+            suscipit?
+          </p>
+        </div>
+
+        <div className="card w-[220px] h-fit px-[20px] py-2  bg-c3">
+          <img src="./i3.png" className="w-[100px]" alt="" />
+          <p className="capitalize text-md font-semibold">get certificate</p>
+          <p className="text-sm opacity-[.8]">
+            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Possimus,
+            suscipit?
+          </p>
+        </div>
+
+        <div className="card w-[220px] h-fit px-[20px] py-2  bg-c3">
+          <img src="./i1.png" className="w-[100px]" alt="" />
+          <p className="capitalize text-md font-semibold">get certificate</p>
+          <p className="text-sm opacity-[.8]">
+            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Possimus,
+            suscipit?
+          </p>
+        </div>
+
+      
+        
       </div>
     </div>
   );
