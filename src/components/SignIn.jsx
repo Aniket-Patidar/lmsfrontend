@@ -1,17 +1,20 @@
+import { loginUser, registerUser } from "@/redux/action/userAction";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import { FaGoogle } from "react-icons/fa";
+import { useDispatch, useSelector } from "react-redux";
 const SignIn = ({ setSign }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [username, setUsername] = useState("");
   const [err, setErr] = useState({});
-
+  const { error } = useSelector((e) => e.user);
+  const dispatch = useDispatch();
   useEffect(() => {
     setErr({});
   }, [email, password, username]);
 
-  function handelLogin() {
+  function handelSignUp() {
     if (email === "" && password === "" && username == "") {
       setErr({
         email: "please enter email",
@@ -40,10 +43,13 @@ const SignIn = ({ setSign }) => {
       setErr({ ...err, email: "please enter valid" });
       return false;
     }
-
     setErr({});
+    dispatch(registerUser({ email, password, name: username }));
+    if (error) {
+      alert(error);
+      return false;
+    }
     setSign(false);
-    console.log({ email, password, username });
   }
 
   return (
@@ -111,8 +117,8 @@ const SignIn = ({ setSign }) => {
           Forgot password?
         </Link>
       </div>
-      <button className="bg-blue-500 w-full py-2" onClick={handelLogin}>
-        Login
+      <button className="bg-blue-500 w-full py-2" onClick={handelSignUp}>
+        signUp
       </button>
       <p className="text-sm mt-2">
         New to Easy Learning ?{" "}

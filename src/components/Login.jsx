@@ -1,11 +1,15 @@
+import { loginUser } from "@/redux/action/userAction";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import { FaGoogle } from "react-icons/fa";
+import { useDispatch, useSelector } from "react-redux";
 const Login = ({ setLogin }) => {
+  const { error } = useSelector((e) => e.user);
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [err, setErr] = useState({});
-
+  const dispatch = useDispatch();
   useEffect(() => {
     setErr({});
   }, [email, password]);
@@ -34,10 +38,13 @@ const Login = ({ setLogin }) => {
       setErr({ ...err, email: "please enter valid" });
       return false;
     }
-
     setErr({});
-    setLogin(false);
-    console.log({ email, password });
+    dispatch(loginUser({ email, password }));
+    if (error) {
+      alert(error);
+      return false;
+    } 
+      setLogin(false);
   }
 
   return (

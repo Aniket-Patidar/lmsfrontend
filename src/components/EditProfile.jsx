@@ -1,65 +1,92 @@
+import { Avatar, updateProfile } from "@/redux/action/userAction";
 import Link from "next/link";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { FaGoogle } from "react-icons/fa";
+import { useDispatch, useSelector } from "react-redux";
 
+const EditProfile = ({ setShow, user }) => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [username, setUsername] = useState("");
+  const [err, setErr] = useState({});
+  const dispatch = useDispatch();
+  const ref = useRef();
+  const { error } = useSelector((e) => e.user);
 
+  useEffect(() => {
+    setErr({});
+  }, [email, password, username]);
 
-const EditProfile = ({setShow}) => {
+  useEffect(() => {
+    if (user) {
+      setEmail(user.email);
+      setUsername(user.name);
+    }
+  }, [user]);
 
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-    const [username, setUsername] = useState("");
-    const [err, setErr] = useState({});
-  
-    useEffect(() => {
-      setErr({});
-    }, [email, password, username]);
-  
-    function handelSubmit() {
-      if (email === "" && password === "" && username == "") {
-        setErr({
-          email: "please enter email",
-          password: "please enter password",
-          username: "please enter username",
-        });
-        return false;
-      }
-      if (username === "") {
-        setErr({ ...err, email: "please enter username" });
-        return false;
-      }
-      if (email === "") {
-        setErr({ ...err, email: "please enter email" });
-        return false;
-      }
-      if (password === "") {
-        setErr({ ...err, password: "please enter password" });
-        return false;
-      }
-      if (password.length < 3) {
-        setErr({ ...err, password: "password must be at least 3 characters" });
-        return false;
-      }
-      if (email.length < 3) {
-        setErr({ ...err, email: "please enter valid" });
-        return false;
-      }
-  
-      setErr({});
-      setShow(false);
-      console.log({ email, password, username });
+  function handleChange(e) {
+    const file = e.target.files[0];
+    const formData = new FormData();
+    formData.append("avatar", file);
+    dispatch(Avatar(formData));
+  }
+
+  function handelClickOnImage() {
+    ref.current.click();
+  }
+
+  function handelSubmit() {
+    if (email === "" && username == "") {
+      setErr({
+        email: "please enter email",
+        username: "please enter username",
+      });
+      return false;
+    }
+    if (username === "") {
+      setErr({ ...err, email: "please enter username" });
+      return false;
+    }
+    if (email === "") {
+      setErr({ ...err, email: "please enter email" });
+      return false;
     }
 
-    
+    if (email.length < 3) {
+      setErr({ ...err, email: "please enter valid" });
+      return false;
+    }
+
+    setErr({});
+    dispatch(updateProfile({ name:username,email }));
+    if (error) {
+      alert(error);
+      return;
+    }
+    setShow(false);
+  }
 
   return (
     <div className="bg-white w-[60vw] md:w-fit fixed px-[30px]  rounded-lg  py-[20px] top-[50%]   left-[50%] -translate-x-[50%] -translate-y-[50%]">
-      {/* <p className="font-semibold text-lg text-center my-2">Edit Profile</p> */}
+      <input
+        className="hidden"
+        name="avatar"
+        ref={ref}
+        onChange={handleChange}
+        type="file"
+      />
+
       <div className="flex items-center justify-center">
-          <img src="./a.jpg" className="w-[100px] h-[100px] rounded-full" alt="" />
+        <img
+          onClick={handelClickOnImage}
+          src={
+            user?.avatar ? `http://localhost:3001/${user.avatar}` : "./a.jpg"
+          }
+          className="w-[100px] h-[100px] rounded-full"
+          alt=""
+        />
       </div>
 
-    
       <div className="flex flex-col gap-[15px]">
         <div>
           <p className="font-semibold text-md">Username</p>
@@ -67,6 +94,7 @@ const EditProfile = ({setShow}) => {
             type="text"
             placeholder="Username..."
             className="border w-full px-2 py-1"
+            value={username}
             onChange={(e) => {
               setUsername(e.target.value);
             }}
@@ -80,6 +108,7 @@ const EditProfile = ({setShow}) => {
           <p className="font-semibold text-md">Email</p>
           <input
             type="text"
+            value={email}
             placeholder="please enter your email id"
             className="border w-full px-2 py-1"
             onChange={(e) => {
@@ -90,11 +119,11 @@ const EditProfile = ({setShow}) => {
             <p className="text-sm text-red-500">{err["email"]}</p>
           )}
         </div>
-        <div>
+        {/*  <div>
           <p className="font-semibold text-md">Password</p>
-
           <input
             type="text"
+            value={password}
             placeholder="Password..."
             className="border w-full px-2 py-1"
             onChange={(e) => setPassword(e.target.value)}
@@ -102,15 +131,14 @@ const EditProfile = ({setShow}) => {
           {err["password"] && (
             <p className="text-sm text-red-500">{err["password"]}</p>
           )}
-        </div>
+        </div> */}
       </div>
-   
+
       <button className="bg-blue-500 w-full py-2 mt-5" onClick={handelSubmit}>
         Submit
       </button>
-     
     </div>
-  )
-}
+  );
+};
 
-export default EditProfile
+export default EditProfile;
