@@ -13,9 +13,6 @@ const profile = () => {
 
   const dispatch = useDispatch();
   const router = useRouter();
-
-  useUserAuthentication();
-
   
   function handleChange(e) {
     const file = e.target.files[0];
