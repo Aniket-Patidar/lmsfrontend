@@ -53,7 +53,7 @@ const EditProfile = ({setShow}) => {
     
 
   return (
-    <div className="bg-white w-fit fixed px-[30px]  rounded-lg  py-[20px] top-[50%]   left-[50%] -translate-x-[50%] -translate-y-[50%]">
+    <div className="bg-white w-[60vw] md:w-fit fixed px-[30px]  rounded-lg  py-[20px] top-[50%]   left-[50%] -translate-x-[50%] -translate-y-[50%]">
       {/* <p className="font-semibold text-lg text-center my-2">Edit Profile</p> */}
       <div className="flex items-center justify-center">
           <img src="./a.jpg" className="w-[100px] h-[100px] rounded-full" alt="" />
