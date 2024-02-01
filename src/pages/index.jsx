@@ -11,23 +11,19 @@ import Footers from "@/components/Footers";
 import { useEffect, useState } from "react";
 import Login from "@/components/Login";
 import SignIn from "@/components/SignIn";
+import Layout from "@/components/Layout";
 export default function Home() {
   const [login, setLogin] = useState(false);
   const [sign, setSign] = useState(false);
 
   return (
-    <div className="bg-c3  relative">
-      <Navbar setSign={setSign} setLogin={setLogin} />
-      <div className="relative">
-        <Main></Main>
-        {login && <Login setLogin={setLogin}></Login>}
-        {sign && <SignIn setSign={setSign}></SignIn>}
-      </div>
+    <Layout color={"c1"}>
+      <Main></Main>
       <Ratings></Ratings>
       <Feature></Feature>
       <Courses></Courses>
       <GetStart></GetStart>
       <Footers></Footers>
-    </div>
+    </Layout>
   );
 }
