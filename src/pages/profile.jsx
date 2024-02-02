@@ -1,6 +1,7 @@
 import EditProfile from "@/components/EditProfile";
 import useUserAuthentication from "@/components/JwtHook";
 import Layout from "@/components/Layout";
+import MyImage from "@/components/LazyLoad";
 import { Avatar, getUserJwt } from "@/redux/action/userAction";
 import { useRouter } from "next/router";
 import React, { useEffect, useRef, useState } from "react";
@@ -56,11 +57,11 @@ const profile = () => {
             </div>
             <div className="flex flex-col md:flex-row   md:items-center md:max-w-[60vw] gap-[20px] my-2">
               <div>
-                <img
+                <MyImage
                   onClick={handelClickOnImage}
                   src={
                     user?.avatar
-                      ? `http://localhost:3001/${user.avatar}`
+                      ? `${process.env.NEXT_PUBLIC_REACT_APP_API_URL}/${user.avatar}`
                       : "./a.jpg"
                   }
                   className="w-[170px] h-[160px] object-cover object-center"

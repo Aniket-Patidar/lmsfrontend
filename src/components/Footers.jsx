@@ -1,4 +1,5 @@
 import React from "react";
+import MyImage from "./LazyLoad";
 
 const Footers = () => {
   return (
@@ -6,7 +7,7 @@ const Footers = () => {
       <div className="bg-c2 p-[30px]  rounded-t-3xl flex flex-col md:flex-row justify-evenly gap-[50px]">
         <div className="md:w-[30%] h-full  flex flex-col  justify-between ">
           <div>
-            <img src="./logo.png" className="w-[90px] mb-[20px]" alt="" />
+            <MyImage src="./logo.png" className="w-[90px] mb-[20px]" alt="" />
             <p className="text-sm">
               Lorem ipsum dolor sit amet consectetur Aniket patidar adipisicing
               elit. Tenetur temporibus magnam{" "}

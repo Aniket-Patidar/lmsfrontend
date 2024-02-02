@@ -6,6 +6,7 @@ import { useRouter } from "next/router";
 import { useDispatch, useSelector } from "react-redux";
 import { getUserJwt, logout } from "@/redux/action/userAction";
 import useUserAuthentication from "./JwtHook";
+import MyImage from "./LazyLoad";
 const Navbar = ({ setSign, setLogin, color }) => {
   const { user } = useSelector((e) => e.user);
 
@@ -66,7 +67,7 @@ const Navbar = ({ setSign, setLogin, color }) => {
           <Link href="#">Blog</Link>
           <Link href="#">Course</Link>
         </div>
-        <img className="w-[140px]" src="./logo.png" alt="" />
+        <MyImage className="w-[140px]" src="./logo.png" alt="" />
         {!isLoggin ? (
           <div className="flex gap-[35px]">
             <button onClick={handelLogin}>Log In</button>
@@ -100,7 +101,7 @@ const Navbar = ({ setSign, setLogin, color }) => {
 
       <div className="md:hidden text-[10px] flex  justify-between items-center h-fit font-semibold gap-1 px-2 bg-c1">
         <div className="flex items-center gap-2 h-fit">
-          <img className="w-[70px] -mt-1" src="./logo.png" alt="" />
+          <MyImage className="w-[70px] -mt-1" src="./logo.png" alt="" />
           <Link href="/">Home</Link>
           <Link href="#">Blog</Link>
           <Link href="#">Course</Link>

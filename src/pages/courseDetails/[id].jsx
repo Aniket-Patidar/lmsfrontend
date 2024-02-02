@@ -31,6 +31,7 @@ const CourseDetails = () => {
 
   useEffect(() => {
     const isEnrolled = user?.courses.some((course) => course._id === id);
+    dispatch(getUserJwt());
     setIsEnrolled(isEnrolled);
   }, [HandelBuyCourse]);
 
@@ -118,7 +119,7 @@ const CourseDetails = () => {
 
               <div className="md:w-[50%]">
                 <video
-                  src={`http://localhost:3001${course.demoVideoUrl}`}
+                  src={`${process.env.NEXT_PUBLIC_REACT_APP_API_URL}/${course.demoVideoUrl}`}
                   className="w-[100%] md:w-[400px]"
                   alt="aaa"
                 />

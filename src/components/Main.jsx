@@ -1,5 +1,6 @@
 import React from "react";
 import { FaArrowTrendUp } from "react-icons/fa6";
+import MyImage from "./LazyLoad";
 
 const Main = () => {
   return (
@@ -30,7 +31,7 @@ const Main = () => {
           </div>
         </div>
         <div className="mx-auto flex items-center justify-center mt-[10px] md:mt-0">
-          <img src="./2.png" alt="" />
+          <MyImage  src="./2.png" alt="" />
         </div>
       </div>
     </>

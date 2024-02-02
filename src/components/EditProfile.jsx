@@ -58,7 +58,7 @@ const EditProfile = ({ setShow, user }) => {
     }
 
     setErr({});
-    dispatch(updateProfile({ name:username,email }));
+    dispatch(updateProfile({ name: username, email }));
     if (error) {
       alert(error);
       return;
@@ -77,14 +77,17 @@ const EditProfile = ({ setShow, user }) => {
       />
 
       <div className="flex items-center justify-center">
-        <img
-          onClick={handelClickOnImage}
-          src={
-            user?.avatar ? `http://localhost:3001/${user.avatar}` : "./a.jpg"
-          }
-          className="w-[100px] h-[100px] rounded-full"
-          alt=""
-        />
+        <div onClick={handelClickOnImage}>
+          <MyImage
+            src={
+              user?.avatar
+                ? `${process.env.NEXT_PUBLIC_REACT_APP_API_URL}/${user.avatar}`
+                : "./a.jpg"
+            }
+            className="w-[100px] h-[100px] rounded-full"
+            alt="avatar"
+          />
+        </div>
       </div>
 
       <div className="flex flex-col gap-[15px]">

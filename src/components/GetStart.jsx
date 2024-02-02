@@ -1,6 +1,7 @@
 import React from "react";
 import { TfiHandPointRight } from "react-icons/tfi";
 import { FaArrowTrendUp } from "react-icons/fa6";
+import MyImage from "./LazyLoad";
 
 const GetStart = () => {
   return (
@@ -35,13 +36,13 @@ const GetStart = () => {
           </ol>
         </div>
         <div className="md:w-[50%] w-full">
-          <img src="./6.png" className="w-[55vw] md:w-[25vw] mx-auto " alt="" />
+          <MyImage src="./6.png" className="w-[55vw] md:w-[25vw] mx-auto " alt="" />
         </div>
       </div>
 
       <div className="section7  px-5  md:px-[15vw] md:pt-[31px] py-[20px]  h-fit">
         <div className="w-full  md:h-[300px] bg-c1 rounded-lg md:px-[40px] flex  flex-col md:flex-row items-center justify-center gap-[20px]">
-          <img src="./7.png" className="h-[100%]" alt="" />
+          <MyImage src="./7.png" className="h-[100%]" alt="" />
           <div className="px-[20px] md:px-0">
             <h1 className="capitalize text-4xl font-semibold">
               get ready to start

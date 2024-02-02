@@ -52,7 +52,7 @@ const Lesson = () => {
                   style={{ height: `calc(100vh - 50px)` }}
                 >
                   <video
-                    src={`http://localhost:3001${video}`}
+                    src={`${process.env.NEXT_PUBLIC_REACT_APP_API_URL}/${video}`}
                     controls
                     className="w-full autoplay"
                   ></video>

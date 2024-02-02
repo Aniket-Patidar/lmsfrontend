@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { setLoading, setError, setUser, setEnrolledCourses, logoutUser } from '../sclice/userSclice';
-const basePath = 'http://localhost:3001'
+const basePath = `${process.env.NEXT_PUBLIC_REACT_APP_API_URL}`
 
 export const loginUser = (userData) => async (dispatch) => {
     try {
@@ -35,7 +35,7 @@ export const getUserJwt = () => async (dispatch) => {
         const token = localStorage.getItem('token');
 
         if (!token) {
-           return;
+            return;
         }
 
         const config = {
@@ -47,8 +47,6 @@ export const getUserJwt = () => async (dispatch) => {
         const { data } = await axios.post(`${basePath}/user/jwt`, { token }, config);
 
         const { token: newToken, user } = data;
-
-        console.log("jwt call");
         dispatch(setUser(user));
         localStorage.setItem('token', newToken);
     } catch (error) {

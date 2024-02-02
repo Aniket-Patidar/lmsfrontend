@@ -1,4 +1,5 @@
 import React from 'react'
+import MyImage from './LazyLoad'
 
 const Ratings = () => {
   return (
@@ -35,7 +36,7 @@ const Ratings = () => {
           education
         </h1>
         <div className="md:-[50%] flex items-center justify-end">
-          <img src="./1.png" alt="" />
+          <MyImage src="./1.png" alt="" />
         </div>
         <div className="capitalize  md:w-[40%] md:pr-[0vw]">
           <h1 className="font-extrabold hidden md:inline-block md:font-semibold md:text-[3vw]">

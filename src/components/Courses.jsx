@@ -4,6 +4,7 @@ import { FaStar } from "react-icons/fa6";
 import { FaClock } from "react-icons/fa";
 import { useRouter } from "next/router";
 import { useSelector } from "react-redux";
+import MyImage from "./LazyLoad";
 const Courses = () => {
   const { courses } = useSelector((e) => e.course);
   const { user } = useSelector((e) => e.course);
@@ -37,9 +38,11 @@ const Courses = () => {
                     key={_id}
                     className="bg-[#dadada] mx-auto md:m-0 max-w-[300px]  text-black w-fit py-[15px] px-3 rounded-md"
                   >
-                    <img
-                      className="w-[35vw] md:w-[15vw]   object-cover mx-auto"
-                      src={`http://localhost:3001${thumbnailPoster}`}
+                    <MyImage
+                      // className="w-[35vw] md:w-[15vw]   object-cover mx-auto"
+                      className={"w-[340vw] h-[200px] object-cover object-center mx-auto "}
+                     
+                      src={`${process.env.NEXT_PUBLIC_REACT_APP_API_URL}${thumbnailPoster}`}
                       alt={`${thumbnailPoster}`}
                     />
                     <div className="flex justify-between text-[10px]">

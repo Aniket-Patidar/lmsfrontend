@@ -1,7 +1,8 @@
 import axios from 'axios';
 import { setLoading, setError, setCourses, setByIDCourse } from '../sclice/courseSclice';
 
-const basePath = 'http://localhost:3001/course';
+const apiUrl = process.env.NEXT_PUBLIC_REACT_APP_API_URL;
+const basePath = `${apiUrl}/course`;
 
 export const fetchCourses = () => async (dispatch) => {
     try {
@@ -19,7 +20,6 @@ export const fetchByIdCourse = (id) => async (dispatch) => {
     try {
         dispatch(setLoading());
         const response = await axios.get(`${basePath}/${id}`);
-        console.log(response.data.course, "===course");
         dispatch(setByIDCourse(response.data.course));
     } catch (error) {
         console.log(error);

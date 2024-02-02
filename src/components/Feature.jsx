@@ -1,5 +1,6 @@
 import React from "react";
 import { FaArrowTrendUp } from "react-icons/fa6";
+import MyImage from "./LazyLoad";
 
 const Feature = () => {
   return (
@@ -20,7 +21,7 @@ const Feature = () => {
           </div>
 
           <div className="card w-[180px] h-fit px-[20px] py-2  bg-c3">
-            <img src="./i1.png" className="w-[72px] md:w-[100px] " alt="" />
+            <MyImage src="./i1.png" className="w-[72px] md:w-[100px] " alt="" />
             <p className="capitalize text-md font-semibold">get certificate</p>
             <p className="text-sm opacity-[.8]">
               Lorem ipsum, dolor sit amet consectetur adipisicing elit.
@@ -29,7 +30,7 @@ const Feature = () => {
           </div>
 
           <div className="card w-[180px] h-fit px-[20px] py-2  bg-c3">
-            <img src="./i2.png" className="w-[72px] md:w-[100px] " alt="" />
+            <MyImage src="./i2.png" className="w-[72px] md:w-[100px] " alt="" />
             <p className="capitalize text-md font-semibold">get certificate</p>
             <p className="text-sm opacity-[.8]">
               Lorem ipsum, dolor sit amet consectetur adipisicing elit.
@@ -38,7 +39,7 @@ const Feature = () => {
           </div>
 
           <div className="card w-[180px] h-fit px-[20px] py-2  bg-c3">
-            <img src="./i3.png" className="w-[72px] md:w-[100px] " alt="" />
+            <MyImage src="./i3.png" className="w-[72px] md:w-[100px] " alt="" />
             <p className="capitalize text-md font-semibold">get certificate</p>
             <p className="text-sm opacity-[.8]">
               Lorem ipsum, dolor sit amet consectetur adipisicing elit.
@@ -47,7 +48,7 @@ const Feature = () => {
           </div>
 
           <div className="card w-[180px] h-fit px-[20px] py-2  bg-c3">
-            <img src="./i1.png" className="w-[72px] md:w-[100px] " alt="" />
+            <MyImage src="./i1.png" className="w-[72px] md:w-[100px] " alt="" />
             <p className="capitalize text-md font-semibold">get certificate</p>
             <p className="text-sm opacity-[.8]">
               Lorem ipsum, dolor sit amet consectetur adipisicing elit.
