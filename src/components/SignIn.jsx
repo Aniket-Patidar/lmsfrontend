@@ -45,10 +45,7 @@ const SignIn = ({ setSign }) => {
     }
     setErr({});
     dispatch(registerUser({ email, password, name: username }));
-    if (error) {
-      alert(error);
-      return false;
-    }
+  
     setSign(false);
   }
 

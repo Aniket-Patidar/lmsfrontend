@@ -13,12 +13,13 @@ const profile = () => {
 
   const dispatch = useDispatch();
   const router = useRouter();
-  
+
   function handleChange(e) {
     const file = e.target.files[0];
     const formData = new FormData();
     formData.append("avatar", file);
     dispatch(Avatar(formData));
+    dispatch(getUserJwt());
   }
 
   function handelClickOnImage() {

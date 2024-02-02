@@ -11,12 +11,7 @@ export const loginUser = (userData) => async (dispatch) => {
         localStorage.setItem('token', token);
     } catch (error) {
         console.error(error);
-        if (error.message) {
-            dispatch(setError(error.message));
-            return;
-        }
-        console.log(error.response?.data?.message);
-        dispatch(setError(error.response?.data?.message));
+        dispatch(setError(error.response?.data?.message || "login failed"));
     }
 }
 
@@ -33,24 +28,34 @@ export const registerUser = (userData) => async (dispatch) => {
     }
 }
 
-export const getUserJwt = (token) => async (dispatch) => {
+export const getUserJwt = () => async (dispatch) => {
     try {
         dispatch(setLoading());
 
-        const { data } = await axios.post(`${basePath}/user/jwt`, { token: localStorage.getItem('token') }, {
+        const token = localStorage.getItem('token');
+
+        if (!token) {
+           return;
+        }
+
+        const config = {
             headers: {
-                'authorization': `${localStorage.getItem('token')}`
+                'Authorization': `${token}`
             }
-        });
-        const { token, user } = data;
-        console.log(user,"===user");
+        };
+
+        const { data } = await axios.post(`${basePath}/user/jwt`, { token }, config);
+
+        const { token: newToken, user } = data;
+
+        console.log("jwt call");
         dispatch(setUser(user));
-        localStorage.setItem('token', token);
+        localStorage.setItem('token', newToken);
     } catch (error) {
-        console.error(error);
-        dispatch(setError(error.response?.data?.message));
+        console.error('Error fetching user JWT:', error);
+        dispatch(setError(error.message || 'Failed to fetch user JWT'));
     }
-}
+};
 
 
 export const Avatar = (userData) => async (dispatch) => {
@@ -61,7 +66,6 @@ export const Avatar = (userData) => async (dispatch) => {
                 'authorization': `${localStorage.getItem('token')}`
             }
         });
-        console.log(data, "avatar");
     } catch (error) {
         dispatch(setError(error.message));
     }
@@ -76,9 +80,7 @@ export const updateProfile = (userData) => async (dispatch) => {
                 'authorization': `${localStorage.getItem('token')}`
             }
         });
-        console.log(data, "profile updated");
     } catch (error) {
-        console.log(error);
         dispatch(setError(error.response?.data?.message));
     }
 }
@@ -104,3 +106,6 @@ export const logout = () => async (dispatch) => {
         dispatch(setError(error.message));
     }
 }
+
+
+

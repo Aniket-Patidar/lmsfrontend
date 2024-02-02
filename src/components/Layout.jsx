@@ -6,20 +6,28 @@ import SignIn from "./SignIn";
 import { useDispatch, useSelector } from "react-redux";
 import { getUserJwt } from "@/redux/action/userAction";
 import { useRouter } from "next/router";
+
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 const Layout = ({ children, color }) => {
   const [login, setLogin] = useState(false);
   const [sign, setSign] = useState(false);
-  const { user } = useSelector((e) => e.user);
+  const { user, error } = useSelector((e) => e.user);
   const dispatch = useDispatch();
   const router = useRouter();
 
+  /* check user */
+
   useEffect(() => {
-    dispatch(getUserJwt());
     if (!user) {
-      router.push("/");
+      dispatch(getUserJwt());
     }
   }, []);
-  
+
+  useEffect(() => {
+    toast(error);
+  }, [error]);
 
   return (
     <div className="relative">
@@ -27,6 +35,7 @@ const Layout = ({ children, color }) => {
       <main>{children}</main>
       {login && <Login setLogin={setLogin}></Login>}
       {sign && <SignIn setSign={setSign}></SignIn>}
+      <ToastContainer />
     </div>
   );
 };

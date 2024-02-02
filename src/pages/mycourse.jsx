@@ -9,7 +9,7 @@ const MyCourse = () => {
   const dispatch = useDispatch();
   useEffect(() => {
     if (!user) {
-      dispatch(getUserJwt(localStorage.getItem("token")));
+      dispatch(getUserJwt());
     }
   }, [user]);
 

@@ -3,6 +3,8 @@ import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import { FaGoogle } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
+import { ToastContainer, toast } from "react-toastify";
+
 const Login = ({ setLogin }) => {
   const { error } = useSelector((e) => e.user);
 
@@ -41,10 +43,9 @@ const Login = ({ setLogin }) => {
     setErr({});
     dispatch(loginUser({ email, password }));
     if (error) {
-      alert(error);
       return false;
-    } 
-      setLogin(false);
+    }
+    setLogin(false);
   }
 
   return (

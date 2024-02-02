@@ -22,7 +22,7 @@ const Navbar = ({ setSign, setLogin, color }) => {
 
   useEffect(() => {
     /* TODO */
-    dispatch(getUserJwt(localStorage.getItem("token")));
+    dispatch(getUserJwt());
   }, []);
 
   function handelSignUp() {

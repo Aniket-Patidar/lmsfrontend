@@ -23,14 +23,12 @@ const Lesson = () => {
 
   function getCurrentCourses() {
     const course = user?.courses.find((e) => e._id === id);
-    console.log(course, "=== lesson");
     setCurrentCourses(course);
   }
 
   useEffect(() => {
-    dispatch(getUserJwt(localStorage.getItem("token")));
+    dispatch(getUserJwt());
     getCurrentCourses();
-    console.log(CurrentCourses);
   }, []);
 
   return (

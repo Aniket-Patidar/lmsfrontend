@@ -7,7 +7,6 @@ export const fetchCourses = () => async (dispatch) => {
     try {
         dispatch(setLoading());
         const response = await axios.get(`${basePath}`);
-        console.log(response.data.courses, "===");
         dispatch(setCourses(response.data.courses));
     } catch (error) {
         console.log(error);

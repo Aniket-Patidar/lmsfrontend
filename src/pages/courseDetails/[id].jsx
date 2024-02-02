@@ -2,6 +2,7 @@ import Layout from "@/components/Layout";
 import Navbar from "@/components/Navbar";
 import { enrollCourse, fetchByIdCourse } from "@/redux/action/courseAction";
 import { getUserJwt } from "@/redux/action/userAction";
+import { setError } from "@/redux/sclice/userSclice";
 import axios from "axios";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -17,6 +18,12 @@ const CourseDetails = () => {
   const { courses, course, error } = useSelector((e) => e.course);
   const { user } = useSelector((e) => e.user);
   useEffect(() => {
+    dispatch(getUserJwt());
+
+    if (!user) {
+      dispatch(setError("please login"));
+    }
+
     const isEnrolled = user?.courses.some((course) => course._id === id);
     setIsEnrolled(isEnrolled);
     dispatch(fetchByIdCourse(id));
@@ -24,10 +31,6 @@ const CourseDetails = () => {
 
   useEffect(() => {
     const isEnrolled = user?.courses.some((course) => course._id === id);
-
-    /* TODO */
-    dispatch(getUserJwt(localStorage.getItem("token")));
-
     setIsEnrolled(isEnrolled);
   }, [HandelBuyCourse]);
 
@@ -39,7 +42,7 @@ const CourseDetails = () => {
       dispatch(enrollCourse(id));
     }
     if (error) {
-      alert(error);
+      dispatch(setError(error));
       return;
     }
   }
