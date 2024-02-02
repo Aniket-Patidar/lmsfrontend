@@ -12,9 +12,16 @@ import { useEffect, useState } from "react";
 import Login from "@/components/Login";
 import SignIn from "@/components/SignIn";
 import Layout from "@/components/Layout";
+import { fetchCourses } from "@/redux/action/courseAction";
+import { useDispatch } from "react-redux";
 export default function Home() {
   const [login, setLogin] = useState(false);
   const [sign, setSign] = useState(false);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchCourses());
+  }, []);
 
   return (
     <Layout color={"c1"}>

@@ -13,10 +13,10 @@ export const loginUser = (userData) => async (dispatch) => {
         console.error(error);
         if (error.message) {
             dispatch(setError(error.message));
-        } else {
-            console.log(error.response?.data?.message);
-            dispatch(setError(error.response?.data?.message));
+            return;
         }
+        console.log(error.response?.data?.message);
+        dispatch(setError(error.response?.data?.message));
     }
 }
 
@@ -33,7 +33,7 @@ export const registerUser = (userData) => async (dispatch) => {
     }
 }
 
-export const getUserJwt = () => async (dispatch) => {
+export const getUserJwt = (token) => async (dispatch) => {
     try {
         dispatch(setLoading());
 
@@ -43,6 +43,7 @@ export const getUserJwt = () => async (dispatch) => {
             }
         });
         const { token, user } = data;
+        console.log(user,"===user");
         dispatch(setUser(user));
         localStorage.setItem('token', token);
     } catch (error) {
@@ -74,7 +75,7 @@ export const updateProfile = (userData) => async (dispatch) => {
             headers: {
                 'authorization': `${localStorage.getItem('token')}`
             }
-        } );
+        });
         console.log(data, "profile updated");
     } catch (error) {
         console.log(error);

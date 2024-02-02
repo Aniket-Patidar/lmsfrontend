@@ -4,12 +4,10 @@ import { RxHamburgerMenu } from "react-icons/rx";
 import { CgProfile } from "react-icons/cg";
 import { useRouter } from "next/router";
 import { useDispatch, useSelector } from "react-redux";
-import { logout } from "@/redux/action/userAction";
+import { getUserJwt, logout } from "@/redux/action/userAction";
 import useUserAuthentication from "./JwtHook";
 const Navbar = ({ setSign, setLogin, color }) => {
   const { user } = useSelector((e) => e.user);
-  
-  
 
   function handelLogin() {
     setSign((e) => {
@@ -22,6 +20,11 @@ const Navbar = ({ setSign, setLogin, color }) => {
     setLogin((e) => !e);
   }
 
+  useEffect(() => {
+    /* TODO */
+    dispatch(getUserJwt(localStorage.getItem("token")));
+  }, []);
+
   function handelSignUp() {
     setLogin((e) => {
       if (e == true) {
@@ -33,7 +36,7 @@ const Navbar = ({ setSign, setLogin, color }) => {
     setSign((e) => !e);
   }
   const [isLoggin, setIsLoggedIn] = useState(null);
-  
+
   useEffect(() => {
     setIsLoggedIn(localStorage.getItem("token"));
   }, [user]);
@@ -42,13 +45,12 @@ const Navbar = ({ setSign, setLogin, color }) => {
   const router = useRouter();
 
   const dispatch = useDispatch();
-  
+
   function handelLogout() {
     localStorage.removeItem("token");
     dispatch(logout());
     router.reload();
   }
-
 
   return (
     <div className="relative">

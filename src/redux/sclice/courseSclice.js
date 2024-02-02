@@ -1,44 +1,36 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice } from '@reduxjs/toolkit';
 
-export const userSlice = createSlice({
-    name: 'user',
-    initialState: {
-        user: null,
-        isAuthenticated: false,
-        loading: false,
-        error: null,
-        enrolledCourses: [],
+export const courseSlice = createSlice({
+  name: 'course',
+  initialState: {
+    courses: [],
+    loading: false,
+    error: null,
+  },
+  reducers: {
+    setCourses: (state, action) => {
+      state.courses = action.payload;
+      state.loading = false;
+      state.error = null;
     },
-    reducers: {
-        setUser: (state, action) => {
-            state.user = action.payload;
-            state.isAuthenticated = true;
-            state.loading = false;
-            state.error = null;
-        },
-        setLoading: (state) => {
-            state.loading = true;
-        },
-        setError: (state, action) => {
-            state.error = action.payload;
-            state.loading = false;
-        },
-        clearError: (state) => {
-            state.error = null;
-        },
-        logoutUser: (state) => {
-            state.user = null;
-            state.isAuthenticated = false;
-            state.loading = false;
-            state.error = null;
-            state.enrolledCourses = [];
-        },
-        setEnrolledCourses: (state, action) => {
-            state.enrolledCourses = action.payload;
-        }
+    setByIDCourse: (state, action) => {
+      state.course = action.payload;
+      state.loading = false;
+      state.error = null;
     },
-})
+    setLoading: (state) => {
+      state.loading = true;
+    },
+    setError: (state, action) => {
+      state.error = action.payload;
+      state.loading = false;
+    },
+    clearError: (state) => {
+      state.error = null;
+    },
+  },
+});
 
-export const { setUser, setLoading, setError, clearError, logoutUser, setEnrolledCourses } = userSlice.actions
+export const { setCourses, setLoading, setError, clearError ,setByIDCourse} = courseSlice.actions;
 
-export default userSlice.reducer
+export default courseSlice.reducer;
