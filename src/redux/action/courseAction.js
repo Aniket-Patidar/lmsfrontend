@@ -10,25 +10,27 @@ export const fetchCourses = () => async (dispatch) => {
         const response = await axios.get(`${basePath}`);
         dispatch(setCourses(response.data.courses));
     } catch (error) {
-        console.log(error);
         dispatch(setError(error.message));
     }
 };
 
 export const fetchByIdCourse = (id) => async (dispatch) => {
-
     try {
+        if (!id) {
+
+            return;
+        }
         dispatch(setLoading());
         const response = await axios.get(`${basePath}/${id}`);
         dispatch(setByIDCourse(response.data.course));
     } catch (error) {
-        console.log(error);
         dispatch(setError(error.message));
     }
 };
 
 
 export const createCourse = (courseData) => async (dispatch) => {
+    console.log(courseData);
     try {
         dispatch(setLoading());
         await axios.post(`${basePath}/create`, courseData, {
@@ -39,6 +41,7 @@ export const createCourse = (courseData) => async (dispatch) => {
         });
         dispatch(fetchCourses());
     } catch (error) {
+        dispatch(setError(error.response?.data?.message || "enter correct data"));
         dispatch(setError(error.message));
     }
 };
@@ -73,6 +76,11 @@ export const deleteCourse = (courseId) => async (dispatch) => {
 };
 
 export const enrollCourse = (courseId) => async (dispatch) => {
+
+    if (!courseId) {
+        courseId = localStorage.getItem("currentID");
+    }
+
     try {
         dispatch(setLoading());
         await axios.post(`${basePath}/enrolled-course`, { courseId }, {
@@ -81,8 +89,6 @@ export const enrollCourse = (courseId) => async (dispatch) => {
             },
         });
     } catch (error) {
-        console.log(error);
-        dispatch(setError(error.message));
-        dispatch(setError(error.response?.data?.message));
+        dispatch(setError(error.response?.data));
     }
 };

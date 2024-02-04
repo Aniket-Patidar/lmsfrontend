@@ -2,6 +2,7 @@ import EditProfile from "@/components/EditProfile";
 import useUserAuthentication from "@/components/JwtHook";
 import Layout from "@/components/Layout";
 import MyImage from "@/components/LazyLoad";
+import Loader from "@/components/Loader";
 import { Avatar, getUserJwt } from "@/redux/action/userAction";
 import { useRouter } from "next/router";
 import React, { useEffect, useRef, useState } from "react";
@@ -9,7 +10,7 @@ import { CiEdit } from "react-icons/ci";
 import { useDispatch, useSelector } from "react-redux";
 const profile = () => {
   const [show, setShow] = useState(false);
-  const { user } = useSelector((e) => e.user);
+  const { user,loading } = useSelector((e) => e.user);
   const ref = useRef();
 
   const dispatch = useDispatch();
@@ -29,10 +30,10 @@ const profile = () => {
 
   return (
     <Layout>
-      {
-        /*  */
-
-        <div className="min-h-[100vh] px-[15vw] py-[50px] bg-c1 relative">
+     {loading && <div className="w-full min-h-[80vh] bg-c1 flex justify-center items-center">
+        <Loader></Loader>
+      </div>}
+      {user && <div className="min-h-[100vh] px-[15vw] py-[50px] bg-c1 relative">
           <input
             className="hidden"
             name="avatar"
@@ -57,7 +58,7 @@ const profile = () => {
             </div>
             <div className="flex flex-col md:flex-row   md:items-center md:max-w-[60vw] gap-[20px] my-2">
               <div>
-                <MyImage
+                <img
                   onClick={handelClickOnImage}
                   src={
                     user?.avatar

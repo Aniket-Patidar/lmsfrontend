@@ -28,6 +28,9 @@ const Login = ({ setLogin }) => {
       setErr({ ...err, email: "please enter email" });
       return false;
     }
+
+   
+
     if (password === "") {
       setErr({ ...err, password: "please enter password" });
       return false;

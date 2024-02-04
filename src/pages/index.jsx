@@ -12,15 +12,17 @@ import { useEffect, useState } from "react";
 import Login from "@/components/Login";
 import SignIn from "@/components/SignIn";
 import Layout from "@/components/Layout";
-import { fetchCourses } from "@/redux/action/courseAction";
-import { useDispatch } from "react-redux";
+import { fetchCourses, getAllCourses } from "@/redux/action/courseAction";
+import { useDispatch, useSelector } from "react-redux";
 export default function Home() {
   const [login, setLogin] = useState(false);
   const [sign, setSign] = useState(false);
   const dispatch = useDispatch();
-
+  const { courses } = useSelector((e) => e.course);
   useEffect(() => {
-    dispatch(fetchCourses());
+    if (courses.length === 0) {
+      dispatch(fetchCourses());
+    }
   }, []);
 
   return (

@@ -1,4 +1,5 @@
 import Layout from "@/components/Layout";
+import Loader from "@/components/Loader";
 import Navbar from "@/components/Navbar";
 import { enrollCourse, fetchByIdCourse } from "@/redux/action/courseAction";
 import { getUserJwt } from "@/redux/action/userAction";
@@ -10,32 +11,48 @@ import React, { useEffect, useState } from "react";
 import { RiStarSFill } from "react-icons/ri";
 import { TiTickOutline } from "react-icons/ti";
 import { useDispatch, useSelector } from "react-redux";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 const CourseDetails = () => {
   const dispatch = useDispatch();
   const router = useRouter();
   let { id } = router.query;
   const [isEnrolled, setIsEnrolled] = useState(false);
-  const { courses, course, error } = useSelector((e) => e.course);
+  const { courses, course, error, loading } = useSelector((e) => e.course);
   const { user } = useSelector((e) => e.user);
+
   useEffect(() => {
-    dispatch(getUserJwt());
-
-    if (!user) {
-      dispatch(setError("please login"));
+    if (id) {
+      localStorage.setItem("currentID", id);
     }
+  }, [id]);
 
+  useEffect(() => {
+    if (!user) dispatch(getUserJwt());
     const isEnrolled = user?.courses.some((course) => course._id === id);
     setIsEnrolled(isEnrolled);
-    dispatch(fetchByIdCourse(id));
+    dispatch(fetchByIdCourse(localStorage.getItem("currentID")));
   }, []);
 
   useEffect(() => {
+    if (error != undefined && error != null) {
+    }
+    if (error == "Unauthorized") {
+      toast.error("Login  to axcess course");
+    }
+  }, [error]);
+
+  useEffect(() => {
     const isEnrolled = user?.courses.some((course) => course._id === id);
-    dispatch(getUserJwt());
+    if (!user) dispatch(getUserJwt());
     setIsEnrolled(isEnrolled);
   }, [HandelBuyCourse]);
 
   function HandelBuyCourse() {
+    if (error != null) {
+      return;
+    }
     if (isEnrolled) {
       router.push(`/lessons/${id}`);
       return;
@@ -52,7 +69,13 @@ const CourseDetails = () => {
     <Layout color={"c3"}>
       <div className="bg-c3">
         <div className="bg-c3 flex gap-[5vw] flex-col md:flex-row  px-[15vw] items-start justify-between py-[50px] min-h-[100vh]">
-          {course && (
+          {loading && (
+            <div className="w-full h-full flex justify-center items-center">
+              <Loader></Loader>
+            </div>
+          )}
+
+          {!loading && course && (
             <>
               <div className=" md:w-[50%]">
                 <h1 className="text-3xl capitalize  font-semibold">
@@ -118,14 +141,13 @@ const CourseDetails = () => {
               </div>
 
               <div className="md:w-[50%]">
-                <video
-                  src={`${process.env.NEXT_PUBLIC_REACT_APP_API_URL}/${course.demoVideoUrl}`}
+                <video controls autoPlay muted="true"
+                  src={`${process.env.NEXT_PUBLIC_REACT_APP_API_URL}${course?.demoVideoUrl}`}
                   className="w-[100%] md:w-[400px]"
                   alt="aaa"
                 />
                 {!isEnrolled ? (
                   <>
-                    {" "}
                     <div className="flex items-center font-semibold my-[10px] gap-2">
                       <p className="">{course.price}$</p>
                       <p>69% off</p>
@@ -163,6 +185,7 @@ const CourseDetails = () => {
           )}
         </div>
       </div>
+      <ToastContainer></ToastContainer>
     </Layout>
   );
 };

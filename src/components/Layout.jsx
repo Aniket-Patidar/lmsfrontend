@@ -26,11 +26,13 @@ const Layout = ({ children, color }) => {
   }, []);
 
   useEffect(() => {
-    toast(error);
+    if (error != null) {
+      toast.error(error);
+    }
   }, [error]);
 
   return (
-    <div className="relative">
+    <div className="relative overflow-y-hidden">
       <Navbar setSign={setSign} color={color} setLogin={setLogin} />
       <main>{children}</main>
       {login && <Login setLogin={setLogin}></Login>}

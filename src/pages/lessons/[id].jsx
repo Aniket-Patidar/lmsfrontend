@@ -6,21 +6,31 @@ import { MdKeyboardArrowDown } from "react-icons/md";
 import { TiTickOutline } from "react-icons/ti";
 import { useDispatch, useSelector } from "react-redux";
 import { IoIosArrowBack } from "react-icons/io";
+import Loader from "@/components/Loader";
+
+import ReactPlayer from "react-player/youtube";
+import MyImage from "@/components/LazyLoad";
+
+// Only loads the YouTube player
+
 const Lesson = () => {
   const [show, setShow] = useState(false);
-
   const dispatch = useDispatch();
   const router = useRouter();
   let { id } = router.query;
-  const [isEnrolled, setIsEnrolled] = useState(false);
-  const { courses, course, error } = useSelector((e) => e.course);
-  const { user, loading } = useSelector((e) => e.user);
+
+  const {
+    courses,
+    course,
+    error,
+    loading: loading1,
+  } = useSelector((e) => e.course);
+  const { user, loading: loading2 } = useSelector((e) => e.user);
   const [video, setVideo] = useState(null);
   const [clickBg, setClickBg] = useState(null);
 
   /* TODO */
   const [CurrentCourses, setCurrentCourses] = useState(null);
-
   function getCurrentCourses() {
     const course = user?.courses.find((e) => e._id === id);
     setCurrentCourses(course);
@@ -33,17 +43,18 @@ const Lesson = () => {
 
   return (
     <div className="flex overflow-hidden h-[100vh] bg-[#101426] text-white">
-      {loading && !user ? (
-        <> Loading..</>
+      {!user || loading1 || loading2 ? (
+        <div className="w-full h-full flex justify-center items-center">
+          <Loader></Loader>
+        </div>
       ) : (
         <>
-          {" "}
           {CurrentCourses && (
             <>
               <div className="left w-[75%]  overflow-scroll border-r-2">
                 <h1 className="capitalize bg-[#101426] text-white px-5 py-4 h-[50px] text-sm flex items-center">
                   <span>
-                    <IoIosArrowBack  onClick={()=>router.back()}/>
+                    <IoIosArrowBack onClick={() => router.back()} />
                   </span>{" "}
                   {CurrentCourses.title}
                 </h1>
@@ -51,11 +62,20 @@ const Lesson = () => {
                   className="video w-[full] bg-[#101426]"
                   style={{ height: `calc(100vh - 50px)` }}
                 >
-                  <video
-                    src={`${process.env.NEXT_PUBLIC_REACT_APP_API_URL}/${video}`}
-                    controls
-                    className="w-full autoplay"
-                  ></video>
+                  {video ? (
+                    <video
+                      src={`${process.env.NEXT_PUBLIC_REACT_APP_API_URL}${video}`}
+                      controls
+                      className="w-full object-cover  h-[100%]"
+                    ></video>
+                  ) : (
+                    <div className="w-full h-[100%] flex items-center flex-col justify-center">
+                      <MyImage
+                        src={`${process.env.NEXT_PUBLIC_REACT_APP_API_URL}${CurrentCourses.thumbnailPoster}`}
+                      ></MyImage>
+                      <p className="text-3xl">Let's start the course</p>
+                    </div>
+                  )}
 
                   <div className="px-[35px]">
                     <p className="py-2 text-lg font-semibold">Ask Question</p>

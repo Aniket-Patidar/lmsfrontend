@@ -3,6 +3,7 @@ import Link from "next/link";
 import React, { useEffect, useRef, useState } from "react";
 import { FaGoogle } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
+import MyImage from "./LazyLoad";
 
 const EditProfile = ({ setShow, user }) => {
   const [email, setEmail] = useState("");

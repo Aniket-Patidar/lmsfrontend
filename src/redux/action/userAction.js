@@ -10,7 +10,6 @@ export const loginUser = (userData) => async (dispatch) => {
         dispatch(setUser(user))
         localStorage.setItem('token', token);
     } catch (error) {
-        console.error(error);
         dispatch(setError(error.response?.data?.message || "login failed"));
     }
 }
@@ -23,7 +22,6 @@ export const registerUser = (userData) => async (dispatch) => {
         dispatch(setUser(user));
         localStorage.setItem('token', token);
     } catch (error) {
-        console.error(error);
         dispatch(setError(error.response?.data?.message));
     }
 }
@@ -50,7 +48,6 @@ export const getUserJwt = () => async (dispatch) => {
         dispatch(setUser(user));
         localStorage.setItem('token', newToken);
     } catch (error) {
-        console.error('Error fetching user JWT:', error);
         dispatch(setError(error.message || 'Failed to fetch user JWT'));
     }
 };

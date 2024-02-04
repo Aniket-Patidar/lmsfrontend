@@ -65,7 +65,8 @@ const Navbar = ({ setSign, setLogin, color }) => {
         <div className="flex gap-2 md:gap-[35px]">
           <Link href="/">Home</Link>
           <Link href="#">Blog</Link>
-          <Link href="#">Course</Link>
+          <Link href="/allCourses">Course</Link>
+          <Link href="/dashboard">Dashboard</Link>
         </div>
         <MyImage className="w-[140px]" src="./logo.png" alt="" />
         {!isLoggin ? (

@@ -1,5 +1,6 @@
 import Layout from "@/components/Layout";
 import MyImage from "@/components/LazyLoad";
+import Loader from "@/components/Loader";
 import { getUserJwt } from "@/redux/action/userAction";
 import Link from "next/link";
 import React, { useEffect } from "react";
@@ -17,7 +18,9 @@ const MyCourse = () => {
   return (
     <Layout color={"c2"}>
       {loading && !user ? (
-        <>Loading...</>
+        <div className="w-full h-full flex justify-center items-center">
+          <Loader></Loader>
+        </div>
       ) : (
         <div className="bg-c2  min-h-[100vh]  text-white  px-[15px] py-[15px]">
           <div className="px-[15vw] py-[40px] flex flex-wrap items-center justify-center gap-[25px]">
@@ -32,14 +35,15 @@ const MyCourse = () => {
                 _id,
                 thumbnailPoster,
               }) => {
-  
                 return (
                   <div
                     className="bg-c1 max-w-[300px] overflow-hidden rounded-lg py-5 px-3"
                     key={_id}
                   >
                     <MyImage
-                      className={"w-[340vw] h-[200px] object-cover object-center mx-auto "}
+                      className={
+                        "w-[340vw] h-[200px] object-cover object-center mx-auto "
+                      }
                       src={`${process.env.NEXT_PUBLIC_REACT_APP_API_URL}${thumbnailPoster}`}
                       alt=""
                     />
