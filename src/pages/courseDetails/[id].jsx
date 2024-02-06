@@ -50,7 +50,7 @@ const CourseDetails = () => {
     var receiptId = "qwsaq1";
 
     const response = await fetch(
-      "http://localhost:3001/course/order/" + course._id,
+      `${process.env.NEXT_PUBLIC_REACT_APP_API_URL}/course/order/${course._id}`,
       {
         method: "POST",
         body: JSON.stringify({
@@ -81,7 +81,7 @@ const CourseDetails = () => {
         };
 
         const validateRes = await fetch(
-          "http://localhost:3001/course/order/validate",
+          `${process.env.NEXT_PUBLIC_REACT_APP_API_URL}/course/order/validate`,
           {
             method: "POST",
             body: JSON.stringify(body),

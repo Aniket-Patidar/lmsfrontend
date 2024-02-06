@@ -133,7 +133,7 @@ const Review = () => {
                       <img
                         src={
                           user.avatar
-                            ? `http://localhost:3001/${user.avatar}`
+                            ? `${process.env.NEXT_PUBLIC_REACT_APP_API_URL}/${user.avatar}`
                             : "./placeholder.webp"
                         }
                         className="w-[40px] h-[40px] rounded-full"

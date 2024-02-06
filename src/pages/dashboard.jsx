@@ -57,7 +57,7 @@ const dashboard = () => {
                 <div className=" flex flex-col items-center  relative ">
                   <div className="w-[100px] h-[100px] rounded-full overflow-hidden">
                     <MyImage
-                      src={`http://localhost:3001/uploads/77338aa05dc702f2bb90253b.jpg`}
+                      src={`${process.env.NEXT_PUBLIC_REACT_APP_API_URL}/uploads/77338aa05dc702f2bb90253b.jpg`}
                       alt="admin"
                     />
                   </div>
