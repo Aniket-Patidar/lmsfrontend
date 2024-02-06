@@ -28,7 +28,6 @@ export const fetchByIdCourse = (id) => async (dispatch) => {
     }
 };
 
-
 export const createCourse = (courseData) => async (dispatch) => {
     console.log(courseData);
     try {
@@ -89,6 +88,20 @@ export const enrollCourse = (courseId) => async (dispatch) => {
             },
         });
     } catch (error) {
+        dispatch(setError(error.response?.data));
+    }
+};
+
+export const AddReview = (data) => async (dispatch) => {
+    try {
+        dispatch(setLoading());
+        await axios.post(`${basePath}/review`, data, {
+            headers: {
+                'authorization': localStorage.getItem('token'),
+            },
+        });
+    } catch (error) {
+        console.log(error, "Error");
         dispatch(setError(error.response?.data));
     }
 };

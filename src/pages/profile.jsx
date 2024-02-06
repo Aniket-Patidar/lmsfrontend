@@ -63,7 +63,7 @@ const profile = () => {
                   src={
                     user?.avatar
                       ? `${process.env.NEXT_PUBLIC_REACT_APP_API_URL}/${user.avatar}`
-                      : "./a.jpg"
+                      : "./placeholder.webp"
                   }
                   className="w-[170px] h-[160px] object-cover object-center"
                   alt=""

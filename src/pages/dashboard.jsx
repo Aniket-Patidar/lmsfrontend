@@ -16,6 +16,7 @@ import Create from "@/components/Dashboard/Create";
 import Analytics from "@/components/Dashboard/Analytics";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Course from "@/components/Dashboard/Course";
 
 const dashboard = () => {
   const {
@@ -27,7 +28,7 @@ const dashboard = () => {
   const router = useRouter();
   const dispatch = useDispatch();
 
-  const [show, setShow] = useState("create");
+  const [show, setShow] = useState("analytics");
 
   function err(error) {
     toast.error(error);
@@ -65,28 +66,36 @@ const dashboard = () => {
 
                 <div className="px-[35px] py-[50px] flex flex-col gap-3">
                   <div
-                    className="flex items-center gap-2"
+                    className="flex cursor-pointer items-center gap-2"
                     onClick={() => setShow("profile")}
                   >
                     <CgProfile />
                     <p>Profile</p>
                   </div>
                   <div
-                    className="flex items-center gap-2"
+                    className="flex cursor-pointer items-center gap-2"
                     onClick={() => setShow("create")}
                   >
                     <MdOutlineCreateNewFolder />
                     <p>create</p>
                   </div>
                   <div
-                    className="flex items-center gap-2"
+                    className="flex cursor-pointer items-center gap-2"
                     onClick={() => setShow("update")}
                   >
                     <CiEdit />
                     <p>update</p>
                   </div>
+
                   <div
-                    className="flex items-center gap-2"
+                    className="flex cursor-pointer items-center gap-2"
+                    onClick={() => setShow("course")}
+                  >
+                    <CiEdit />
+                    <p>Course</p>
+                  </div>
+                  <div
+                    className="flex cursor-pointer items-center gap-2"
                     onClick={() => setShow("analytics")}
                   >
                     <TbDeviceDesktopAnalytics />
@@ -99,10 +108,10 @@ const dashboard = () => {
                 </div>
               </div>
               <div className="w-full min-h-[100vh] overflow-y-scroll bg-[#657170] px-[20px] py-[20px]">
-                {show == "profile" && <Profile></Profile>}
-                {show == "update" && <Edit></Edit>}
+                {show == "profile" && <Profile></Profile>}  
                 {show == "create" && <Create err={err}></Create>}
                 {show == "analytics" && <Analytics></Analytics>}
+                {show == "course" && <Course err={err} user={user}></Course>}
               </div>
             </>
           )}

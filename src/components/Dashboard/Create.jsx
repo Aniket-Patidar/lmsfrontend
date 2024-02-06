@@ -4,8 +4,12 @@ import Introduction from "./components/Introduction";
 import Highlights from "./components/Highlights";
 import Preview from "./components/Preview";
 import { useDispatch, useSelector } from "react-redux";
-import { createCourse } from "@/redux/action/courseAction";
-const Create = ({ err }) => {
+import { createCourse, updateCourse } from "@/redux/action/courseAction";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import Course from "./Course";
+
+const Create = ({ err, isUpdate, course }) => {
   const dispatch = useDispatch();
 
   const [formData, setFormData] = useState({
@@ -21,6 +25,12 @@ const Create = ({ err }) => {
     demoVideoUrl: "/uploads/lesson1.mp4",
     modules: [],
   });
+
+  useEffect(() => {
+    if (isUpdate) {
+      setFormData({ ...formData, ...course });
+    }
+  }, []);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -42,30 +52,35 @@ const Create = ({ err }) => {
     error,
   } = useSelector((e) => e.course);
 
-
-
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    setTimeout(() => {}, 5000);
-
-    console.log("delay");
-    dispatch(
-      createCourse({ ...formData, createdBy: localStorage.getItem("id") })
-    );
+    if (isUpdate) {
+      dispatch(updateCourse(course._id, formData));
+      if (!error) {
+        toast.success("course updated successfully");
+      }
+    } else {
+      setTimeout(() => {}, 5000);
+      dispatch(
+        createCourse({ ...formData, createdBy: localStorage.getItem("id") })
+      );
+      if (!error) {
+        toast.success("course created successfully");
+      }
+    }
   };
 
   useEffect(() => {
-    if (error!= null) {
+    if (error != null) {
       err(error);
     }
-  }, [error,handleSubmit]);
-
+  }, [error, handleSubmit]);
 
   return (
-    <div className="text-white overflow-auto">
-      <h1 className="text-2xl font-semibold mb-3">Create Course</h1>
-
+    <div className="text-white w-full items-center overflow-auto">
+      <h1 className="text-2xl font-semibold mb-3">
+        {isUpdate ? "update Course" : "Create Course"}
+      </h1>
       <div className="form">
         {currentPage == 1 && (
           <Introduction
@@ -91,6 +106,7 @@ const Create = ({ err }) => {
       </div>
 
       <button onClick={handleSubmit}>Submit</button>
+      <ToastContainer></ToastContainer>
     </div>
   );
 };

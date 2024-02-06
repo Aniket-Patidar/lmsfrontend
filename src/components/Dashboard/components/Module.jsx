@@ -86,7 +86,7 @@ const Modules = ({ formData, setFormData }) => {
             <div className="my-[15px]">
               <p className="capitalize font-sans text-md">Title</p>
               <input
-                className="w-[50%] capitalize outline-none px-3 py-2 border-[1px] bg-transparent  rounded-md"
+                className="w-[50%] outline-none px-3 py-2 border-[1px] bg-transparent  rounded-md"
                 type="text"
                 name="title"
                 value={module.title}
@@ -97,7 +97,7 @@ const Modules = ({ formData, setFormData }) => {
             <div className="my-[15px]">
               <p className="capitalize font-sans text-md">Description</p>
               <input
-                className="w-[50%] capitalize outline-none px-3 py-2 border-[1px] bg-transparent  rounded-md"
+                className="w-[50%] outline-none px-3 py-2 border-[1px] bg-transparent  rounded-md"
                 type="text"
                 name="description"
                 value={module.description}
@@ -116,7 +116,7 @@ const Modules = ({ formData, setFormData }) => {
                     Sub-module Title
                   </p>
                   <input
-                    className="w-[50%] capitalize outline-none px-3 py-2 border-[1px] bg-transparent  rounded-md"
+                    className="w-[50%] outline-none px-3 py-2 border-[1px] bg-transparent  rounded-md"
                     type="text"
                     name="title"
                     value={video.title}
@@ -132,7 +132,7 @@ const Modules = ({ formData, setFormData }) => {
                     Sub-module Description
                   </p>
                   <input
-                    className="w-[50%] capitalize outline-none px-3 py-2 border-[1px] bg-transparent  rounded-md"
+                    className="w-[50%] outline-none px-3 py-2 border-[1px] bg-transparent  rounded-md"
                     type="text"
                     name="description"
                     value={video.description}
@@ -148,7 +148,7 @@ const Modules = ({ formData, setFormData }) => {
                     Sub-module videoUrl
                   </p>
                   <input
-                    className="w-[50%] capitalize outline-none px-3 py-2 border-[1px] bg-transparent  rounded-md"
+                    className="w-[50%] outline-none px-3 py-2 border-[1px] bg-transparent  rounded-md"
                     type="text"
                     name="videoUrl"
                     value={video.videoUrl}
@@ -163,7 +163,7 @@ const Modules = ({ formData, setFormData }) => {
                     Sub-module duration
                   </p>
                   <input
-                    className="w-[50%] capitalize outline-none px-3 py-2 border-[1px] bg-transparent  rounded-md"
+                    className="w-[50%] outline-none px-3 py-2 border-[1px] bg-transparent  rounded-md"
                     type="text"
                     name="duration"
                     value={video.duration}

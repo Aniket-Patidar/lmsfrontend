@@ -14,7 +14,7 @@ const Introduction = ({handleSubmit, handleChange, formData}) => {
               value={formData.title}
               onChange={handleChange}
               placeholder="Title"
-              className="w-[50%] capitalize outline-none px-3 py-2 border-[1px] bg-transparent  rounded-md"
+              className="w-[50%]  outline-none px-3 py-2 border-[1px] bg-transparent  rounded-md"
             />
           </div>
           <div>
@@ -24,7 +24,7 @@ const Introduction = ({handleSubmit, handleChange, formData}) => {
               value={formData.description}
               onChange={handleChange}
               placeholder="Description"
-              className="w-[50%] capitalize outline-none px-3 py-2 border-[1px] bg-transparent  rounded-md"
+              className="w-[50%]  outline-none px-3 py-2 border-[1px] bg-transparent  rounded-md"
             />
           </div>
           <div>
@@ -35,7 +35,7 @@ const Introduction = ({handleSubmit, handleChange, formData}) => {
               value={formData.instructor}
               onChange={handleChange}
               placeholder="Instructor"
-              className="w-[50%] capitalize outline-none px-3 py-2 border-[1px] bg-transparent  rounded-md"
+              className="w-[50%]  outline-none px-3 py-2 border-[1px] bg-transparent  rounded-md"
             />
           </div>
           <div>
@@ -46,7 +46,7 @@ const Introduction = ({handleSubmit, handleChange, formData}) => {
               value={formData.price}
               onChange={handleChange}
               placeholder="Price"
-              className="w-[50%] capitalize outline-none px-3 py-2 border-[1px] bg-transparent  rounded-md"
+              className="w-[50%]  outline-none px-3 py-2 border-[1px] bg-transparent  rounded-md"
             />
           </div>
           <div>
@@ -57,7 +57,7 @@ const Introduction = ({handleSubmit, handleChange, formData}) => {
               value={formData.duration}
               onChange={handleChange}
               placeholder="Duration"
-              className="w-[50%] capitalize outline-none px-3 py-2 border-[1px] bg-transparent  rounded-md"
+              className="w-[50%]  outline-none px-3 py-2 border-[1px] bg-transparent  rounded-md"
             />
           </div>
           <div>
@@ -68,7 +68,7 @@ const Introduction = ({handleSubmit, handleChange, formData}) => {
               value={formData.category}
               onChange={handleChange}
               placeholder="Category"
-              className="w-[50%] capitalize outline-none px-3 py-2 border-[1px] bg-transparent  rounded-md"
+              className="w-[50%]  outline-none px-3 py-2 border-[1px] bg-transparent  rounded-md"
             />
           </div>
           <div>
@@ -79,7 +79,7 @@ const Introduction = ({handleSubmit, handleChange, formData}) => {
               value={formData.level}
               onChange={handleChange}
               placeholder="Level"
-              className="w-[50%] capitalize outline-none px-3 py-2 border-[1px] bg-transparent  rounded-md"
+              className="w-[50%]  outline-none px-3 py-2 border-[1px] bg-transparent  rounded-md"
             />
           </div>
           <div>
@@ -90,7 +90,7 @@ const Introduction = ({handleSubmit, handleChange, formData}) => {
               value={formData.tags}
               onChange={handleChange}
               placeholder="Tags"
-              className="w-[50%] capitalize outline-none px-3 py-2 border-[1px] bg-transparent  rounded-md"
+              className="w-[50%]  outline-none px-3 py-2 border-[1px] bg-transparent  rounded-md"
             />
           </div>
           <div>
@@ -101,7 +101,7 @@ const Introduction = ({handleSubmit, handleChange, formData}) => {
               value={formData.thumbnailPoster}
               onChange={handleChange}
               placeholder="Thumbnail Poster"
-              className="w-[50%] capitalize outline-none px-3 py-2 border-[1px] bg-transparent  rounded-md"
+              className="w-[50%]  outline-none px-3 py-2 border-[1px] bg-transparent  rounded-md"
             />
           </div>
           <div>
@@ -112,7 +112,7 @@ const Introduction = ({handleSubmit, handleChange, formData}) => {
               value={formData.demoVideoUrl}
               onChange={handleChange}
               placeholder="Demo Video URL"
-              className="w-[50%] capitalize outline-none px-3 py-2 border-[1px] bg-transparent  rounded-md"
+              className="w-[50%]  outline-none px-3 py-2 border-[1px] bg-transparent  rounded-md"
             />
           </div>
        

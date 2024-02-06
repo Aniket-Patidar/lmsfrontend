@@ -6,6 +6,7 @@ export const courseSlice = createSlice({
     courses: [],
     loading: false,
     error: null,
+    course : null,
   },
   reducers: {
     setCourses: (state, action) => {

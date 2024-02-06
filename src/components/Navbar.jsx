@@ -8,7 +8,7 @@ import { getUserJwt, logout } from "@/redux/action/userAction";
 import useUserAuthentication from "./JwtHook";
 import MyImage from "./LazyLoad";
 const Navbar = ({ setSign, setLogin, color }) => {
-  const { user } = useSelector((e) => e.user);
+  const { user ,error} = useSelector((e) => e.user);
 
   function handelLogin() {
     setSign((e) => {
@@ -24,7 +24,11 @@ const Navbar = ({ setSign, setLogin, color }) => {
   useEffect(() => {
     /* TODO */
     dispatch(getUserJwt());
+
+
   }, []);
+
+
 
   function handelSignUp() {
     setLogin((e) => {
@@ -66,7 +70,7 @@ const Navbar = ({ setSign, setLogin, color }) => {
           <Link href="/">Home</Link>
           <Link href="#">Blog</Link>
           <Link href="/allCourses">Course</Link>
-          <Link href="/dashboard">Dashboard</Link>
+        {user && user.role == "admin" &&  <Link href="/dashboard">Dashboard</Link>}
         </div>
         <MyImage className="w-[140px]" src="./logo.png" alt="" />
         {!isLoggin ? (

@@ -43,27 +43,83 @@ const CourseDetails = () => {
     }
   }, [error]);
 
-  useEffect(() => {
-    const isEnrolled = user?.courses.some((course) => course._id === id);
-    if (!user) dispatch(getUserJwt());
-    setIsEnrolled(isEnrolled);
-  }, [HandelBuyCourse]);
+  /* Razor Pay */
+  const paymentHandler = async (e) => {
+    var amount = 500*60;
+    var currency = "INR";
+    var receiptId = "qwsaq1";
 
-  function HandelBuyCourse() {
-    if (error != null) {
-      return;
-    }
-    if (isEnrolled) {
-      router.push(`/lessons/${id}`);
-      return;
-    } else {
-      dispatch(enrollCourse(id));
-    }
-    if (error) {
-      dispatch(setError(error));
-      return;
-    }
-  }
+    const response = await fetch(
+      "http://localhost:3001/course/order/" + course._id,
+      {
+        method: "POST",
+        body: JSON.stringify({
+          amount,
+          currency,
+          receipt: receiptId,
+        }),
+        headers: {
+          "Content-Type": "application/json",
+          authorization: `${localStorage.getItem("token")}`,
+        },
+      }
+    );
+    const order = await response.json();
+    console.log(order);
+
+    var options = {
+      key: "rzp_test_nygA3vR5xQffUJ",
+      amount,
+      currency,
+      name: "Aniket Patidar",
+      description: "Test Transaction",
+      image: "https://example.com/your_logo",
+      order_id: order.id,
+      handler: async function (response) {
+        const body = {
+          ...response,
+        };
+
+        const validateRes = await fetch(
+          "http://localhost:3001/course/order/validate",
+          {
+            method: "POST",
+            body: JSON.stringify(body),
+            headers: {
+              "Content-Type": "application/json",
+              authorization: `${localStorage.getItem("token")}`,
+            },
+          }
+        );
+        const jsonRes = await validateRes.json();
+        console.log(jsonRes);
+      },
+      prefill: {
+        name: "Aniket Patidar",
+        email: "aniket@aniket.com",
+        contact: "6266302210",
+      },
+      notes: {
+        address: "Razorpay Corporate Office",
+      },
+      theme: {
+        color: "#3399cc",
+      },
+    };
+    var rzp1 = new window.Razorpay(options);
+    rzp1.on("payment.failed", function (response) {
+      alert(response.error.code);
+      alert(response.error.description);
+      alert(response.error.source);
+      alert(response.error.step);
+      alert(response.error.reason);
+      alert(response.error.metadata.order_id);
+      alert(response.error.metadata.payment_id);
+    });
+    rzp1.open();
+    e.preventDefault();
+    setIsEnrolled(true);
+  };
 
   return (
     <Layout color={"c3"}>
@@ -141,7 +197,10 @@ const CourseDetails = () => {
               </div>
 
               <div className="md:w-[50%]">
-                <video controls autoPlay muted="true"
+                <video
+                  controls
+                  autoPlay
+                  muted="true"
                   src={`${process.env.NEXT_PUBLIC_REACT_APP_API_URL}${course?.demoVideoUrl}`}
                   className="w-[100%] md:w-[400px]"
                   alt="aaa"
@@ -155,7 +214,7 @@ const CourseDetails = () => {
                     </div>
                     <button
                       className="border border-red-300 px-4 py-2 rounded-full bg-red-500"
-                      onClick={HandelBuyCourse}
+                      onClick={paymentHandler}
                     >
                       Buy now $2220
                     </button>
@@ -163,7 +222,7 @@ const CourseDetails = () => {
                 ) : (
                   <button
                     className="border border-blue-600 px-4 py-2 mt-2 rounded-lg bg-blue-500"
-                    onClick={HandelBuyCourse}
+                    onClick={() => router.push(`/lessons/${course._id}`)}
                   >
                     start learning
                   </button>
