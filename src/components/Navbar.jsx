@@ -8,7 +8,8 @@ import { getUserJwt, logout } from "@/redux/action/userAction";
 import useUserAuthentication from "./JwtHook";
 import MyImage from "./LazyLoad";
 const Navbar = ({ setSign, setLogin, color }) => {
-  const { user ,error} = useSelector((e) => e.user);
+  const { user, error, loading } = useSelector((e) => e.user);
+  const dispatch = useDispatch();
 
   function handelLogin() {
     setSign((e) => {
@@ -20,16 +21,10 @@ const Navbar = ({ setSign, setLogin, color }) => {
     });
     setLogin((e) => !e);
   }
-
   useEffect(() => {
     /* TODO */
     dispatch(getUserJwt());
-
-
   }, []);
-
-
-
   function handelSignUp() {
     setLogin((e) => {
       if (e == true) {
@@ -40,25 +35,27 @@ const Navbar = ({ setSign, setLogin, color }) => {
     });
     setSign((e) => !e);
   }
-  const [isLoggin, setIsLoggedIn] = useState(null);
 
+  const [isLoggin, setIsLoggedIn] = useState(null);
   useEffect(() => {
-    setIsLoggedIn(localStorage.getItem("token"));
+    if (user) {
+      setIsLoggedIn(localStorage.getItem("token"));
+    }
   }, [user]);
 
   const [show, setShow] = useState(false);
   const router = useRouter();
 
-  const dispatch = useDispatch();
-
   function handelLogout() {
-    localStorage.removeItem("token");
     dispatch(logout());
-    router.reload();
+    localStorage.removeItem("token");
+    setIsLoggedIn(false);
   }
 
   return (
     <div className="relative">
+      {/* {loading && <>loading...</>} */}
+
       <div
         className={`flex justify-between font-semibold text-[18px] capitalize items-center text-lg hidden md:flex  bg-${
           color ? color : "c1"
@@ -70,7 +67,9 @@ const Navbar = ({ setSign, setLogin, color }) => {
           <Link href="/">Home</Link>
           <Link href="#">Blog</Link>
           <Link href="/allCourses">Course</Link>
-        {user && user.role == "admin" &&  <Link href="/dashboard">Dashboard</Link>}
+          {user && user.role == "admin" && (
+            <Link href="/dashboard">Dashboard</Link>
+          )}
         </div>
         <MyImage className="w-[140px]" src="./logo.png" alt="" />
         {!isLoggin ? (

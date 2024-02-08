@@ -1,5 +1,6 @@
 import { loginUser, registerUser } from "@/redux/action/userAction";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import { FaGoogle } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
@@ -8,6 +9,7 @@ const SignIn = ({ setSign }) => {
   const [password, setPassword] = useState("");
   const [username, setUsername] = useState("");
   const [err, setErr] = useState({});
+  const router = useRouter()
   const { error } = useSelector((e) => e.user);
   const dispatch = useDispatch();
   useEffect(() => {
@@ -45,7 +47,7 @@ const SignIn = ({ setSign }) => {
     }
     setErr({});
     dispatch(registerUser({ email, password, name: username }));
-  
+
     setSign(false);
   }
 

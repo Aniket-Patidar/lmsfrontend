@@ -15,14 +15,11 @@ import Layout from "@/components/Layout";
 import { fetchCourses, getAllCourses } from "@/redux/action/courseAction";
 import { useDispatch, useSelector } from "react-redux";
 export default function Home() {
-  const [login, setLogin] = useState(false);
-  const [sign, setSign] = useState(false);
   const dispatch = useDispatch();
   const { courses } = useSelector((e) => e.course);
+
   useEffect(() => {
-    if (courses.length === 0) {
-      dispatch(fetchCourses());
-    }
+    !courses.length && dispatch(fetchCourses());
   }, []);
 
   return (

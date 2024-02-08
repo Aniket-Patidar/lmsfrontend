@@ -18,7 +18,7 @@ export const registerUser = (userData) => async (dispatch) => {
     try {
         dispatch(setLoading());
         const { data } = await axios.post(`${basePath}/user/register`, { ...userData });
-        const { token, user } = data;
+        const { token, user, success } = data;
         dispatch(setUser(user));
         localStorage.setItem('token', token);
     } catch (error) {
@@ -41,10 +41,8 @@ export const getUserJwt = () => async (dispatch) => {
             headers: {
                 'Authorization': `${token}`
             }
-        };
-
+        }
         const { data } = await axios.post(`${basePath}/user/jwt`, { token }, config);
-
         const { token: newToken, user } = data;
         dispatch(setUser(user));
         localStorage.setItem('token', newToken);
@@ -58,11 +56,12 @@ export const getUserJwt = () => async (dispatch) => {
 export const Avatar = (userData) => async (dispatch) => {
     try {
         dispatch(setLoading());
-        const data = await axios.post(`${basePath}/user/avatar`, userData, {
+        const {data} = await axios.post(`${basePath}/user/avatar`, userData, {
             headers: {
                 'authorization': `${localStorage.getItem('token')}`
             }
         });
+        dispatch(setUser(data.user));
     } catch (error) {
         dispatch(setError(error.message));
     }
@@ -72,11 +71,13 @@ export const Avatar = (userData) => async (dispatch) => {
 export const updateProfile = (userData) => async (dispatch) => {
     try {
         dispatch(setLoading());
-        const data = await axios.post(`${basePath}/user/update-profile`, userData, {
+        const {data} = await axios.post(`${basePath}/user/update-profile`, userData, {
             headers: {
                 'authorization': `${localStorage.getItem('token')}`
             }
         });
+        dispatch(setUser(data.user));
+
     } catch (error) {
         dispatch(setError(error.response?.data?.message));
     }
@@ -97,9 +98,14 @@ export const fetchEnrolledCourses = () => async (dispatch) => {
 export const logout = () => async (dispatch) => {
     try {
         dispatch(setLoading());
-        const data = await axios.get(`${basePath}/user/logout`);
-        // handle response and dispatch logoutUser
+        const data = await axios.get(`${basePath}/user/logout`, {
+            headers: {
+                'authorization': `${localStorage.getItem('token')}`
+            }
+        });
+        localStorage.removeItem("token");
     } catch (error) {
+        console.log(error);
         dispatch(setError(error.message));
     }
 }

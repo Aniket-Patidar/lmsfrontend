@@ -57,7 +57,11 @@ const dashboard = () => {
                 <div className=" flex flex-col items-center  relative ">
                   <div className="w-[100px] h-[100px] rounded-full overflow-hidden">
                     <MyImage
-                      src={`${process.env.NEXT_PUBLIC_REACT_APP_API_URL}/uploads/77338aa05dc702f2bb90253b.jpg`}
+                      src={
+                        user?.avatar
+                          ? `${process.env.NEXT_PUBLIC_REACT_APP_API_URL}/${user.avatar}`
+                          : "./placeholder.webp"
+                      }
                       alt="admin"
                     />
                   </div>
@@ -67,7 +71,7 @@ const dashboard = () => {
                 <div className="px-[35px] py-[50px] flex flex-col gap-3">
                   <div
                     className="flex cursor-pointer items-center gap-2"
-                    onClick={() => setShow("profile")}
+                    onClick={() => router.push("/profile")}
                   >
                     <CgProfile />
                     <p>Profile</p>
@@ -79,13 +83,13 @@ const dashboard = () => {
                     <MdOutlineCreateNewFolder />
                     <p>create</p>
                   </div>
-                  <div
+                  {/* <div
                     className="flex cursor-pointer items-center gap-2"
                     onClick={() => setShow("update")}
                   >
                     <CiEdit />
                     <p>update</p>
-                  </div>
+                  </div> */}
 
                   <div
                     className="flex cursor-pointer items-center gap-2"
@@ -108,8 +112,8 @@ const dashboard = () => {
                 </div>
               </div>
               <div className="w-full min-h-[100vh] overflow-y-scroll bg-[#657170] px-[20px] py-[20px]">
-                {show == "profile" && <Profile></Profile>}  
-                {show == "create" && <Create err={err}></Create>}
+                {show == "profile" && <Profile></Profile>}
+                {show == "create" && <Create err={err} setShow={setShow}></Create>}
                 {show == "analytics" && <Analytics></Analytics>}
                 {show == "course" && <Course err={err} user={user}></Course>}
               </div>

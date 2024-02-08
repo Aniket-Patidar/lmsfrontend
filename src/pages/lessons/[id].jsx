@@ -2,7 +2,7 @@ import { getUserJwt } from "@/redux/action/userAction";
 import { setCourses } from "@/redux/sclice/courseSclice";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
-import { MdKeyboardArrowDown } from "react-icons/md";
+import { MdKeyboardArrowDown, MdKeyboardArrowUp } from "react-icons/md";
 import { TiTickOutline } from "react-icons/ti";
 import { useDispatch, useSelector } from "react-redux";
 import { IoIosArrowBack, IoMdStar } from "react-icons/io";
@@ -16,6 +16,7 @@ import { fetchByIdCourse } from "@/redux/action/courseAction";
 
 const Lesson = () => {
   const [show, setShow] = useState(false);
+  const [currentModule, setCurrentModule] = useState(0);
   const [showReview, setShowReview] = useState(false);
   const dispatch = useDispatch();
   const router = useRouter();
@@ -31,13 +32,14 @@ const Lesson = () => {
   const [video, setVideo] = useState(null);
   const [clickBg, setClickBg] = useState(null);
 
-
   useEffect(() => {
     dispatch(getUserJwt());
     dispatch(fetchByIdCourse(id));
   }, [id]);
 
-  function HandelReview() {}
+  useEffect(() => {
+    console.log(course?.modules);
+  }, [course]);
 
   return (
     <div className="flex overflow-hidden h-[100vh] bg-[#101426] text-white relative">
@@ -135,68 +137,128 @@ const Lesson = () => {
                   <div className="w-[50%] rounded-full h-full bg-[#B6F6DE]"></div>
                 </div>
               </div>
-              {course?.modules.map(
-                ({ description, title, videos, _id }, index) => {
-                  return (
-                    <div className="h-[100vh] px-[12px] py-[30px] " key={_id}>
-                      <div>
-                        <div
-                          className="bg-[#3B4053] cursor-pointer  flex items-center justify-between px-2 py-2"
-                          onClick={() => setShow(!show)}
-                        >
-                          <div className="flex gap-2 ">
-                            <p>{index + 1}</p>
-                            <div>
-                              <h1 className="capitalize">{title}</h1>
-                              <p>{description}</p>
-                              <p className="text-sm opacity-[.5]">
-                                Module : {videos.length}
-                              </p>
-                            </div>
-                          </div>
-                          <MdKeyboardArrowDown />
-                        </div>
-                        <div className={`${!show && "hidden"}`}>
-                          {videos.map(
-                            ({
-                              _id,
-                              title,
-                              description,
-                              duration,
-                              videoUrl,
-                            }) => {
-                              return (
-                                <div
-                                  onClick={() => {
-                                    setVideo(videoUrl);
-                                    setClickBg(_id);
-                                  }}
-                                  className={`flex gap-2 px-[20px] cursor-pointer items-center my-2  ${
-                                    clickBg === _id && "bg-blue-500"
-                                  } `}
-                                  key={_id}
-                                >
-                                  <p className="w-[20px] h-[20px] rounded-full bg-[#B6F6DE] text-center">
-                                    <TiTickOutline className="text-black m-auto" />
-                                  </p>
-                                  <div>
-                                    <h1 className="capitalize text-sm">
-                                      {title}
-                                    </h1>
-                                    <p className="text-sm opacity-[.5]">
-                                      video {duration} munites
-                                    </p>
-                                  </div>
-                                </div>
-                              );
-                            }
-                          )}
+
+              {course?.modules.map((data, index) => {
+                return (
+                  <div
+                    className="m-[15px]"
+                    key={index}
+                    onClick={() => {
+                      setShow(!show);
+                      setCurrentModule(index);
+                    }}
+                  >
+                    <div className="bg-[#3B4053] cursor-pointer  flex items-center justify-between px-2 py-2">
+                      <div className="flex gap-2 ">
+                        <p>{index + 1}</p>
+                        <div>
+                          <h1 className="capitalize">{data.title}</h1>
+                          <p>{data.description}</p>
+                          <p className="text-sm opacity-[.5]">
+                            lessons : {data.videos.length}
+                          </p>
                         </div>
                       </div>
+                      {show && currentModule == index ? (
+                        <>
+                          <MdKeyboardArrowUp></MdKeyboardArrowUp>
+                        </>
+                      ) : (
+                        <MdKeyboardArrowDown />
+                      )}
                     </div>
-                  );
-                }
-              )}
+                    {show && currentModule == index && (
+                      <div>
+                        {data.videos.map(
+                          ({ _id, title, description, duration, videoUrl }) => {
+                            return (
+                              <div
+                                onClick={() => {
+                                  setVideo(videoUrl);
+                                  setClickBg(_id);
+                                }}
+                                className={`flex gap-2 px-[20px] cursor-pointer items-center my-2  ${
+                                  clickBg === _id && "bg-blue-500"
+                                } `}
+                                key={_id}
+                              >
+                                <p className="w-[20px] h-[20px] rounded-full bg-[#B6F6DE] text-center">
+                                  <TiTickOutline className="text-black m-auto" />
+                                </p>
+                                <div>
+                                  <h1 className="capitalize text-sm">
+                                    {title}
+                                  </h1>
+                                  <p className="text-sm opacity-[.5]">
+                                    video {duration} munites
+                                  </p>
+                                </div>
+                              </div>
+                            );
+                          }
+                        )}
+                      </div>
+                    )}
+                  </div>
+                  // <div className="h-[100vh] px-[12px] py-[30px] " key={_id}>
+                  //   <div>
+                  //     <div
+                  //       className="bg-[#3B4053] cursor-pointer  flex items-center justify-between px-2 py-2"
+                  //       onClick={() => setShow(!show)}
+                  //     >
+                  //       <div className="flex gap-2 ">
+                  //         <p>{index + 1}</p>
+                  //         <div>
+                  //           <h1 className="capitalize">{title}</h1>
+                  //           <p>{description}</p>
+                  //           <p className="text-sm opacity-[.5]">
+                  //             Module : {videos.length}
+                  //           </p>
+                  //         </div>
+                  //       </div>
+                  //       <MdKeyboardArrowDown />
+                  //     </div>
+
+                  //     {/* <div className={`${!show && "hidden"}`}>
+                  //       {videos.map(
+                  //         ({
+                  //           _id,
+                  //           title,
+                  //           description,
+                  //           duration,
+                  //           videoUrl,
+                  //         }) => {
+                  //           return (
+                  //             <div
+                  //               onClick={() => {
+                  //                 setVideo(videoUrl);
+                  //                 setClickBg(_id);
+                  //               }}
+                  //               className={`flex gap-2 px-[20px] cursor-pointer items-center my-2  ${
+                  //                 clickBg === _id && "bg-blue-500"
+                  //               } `}
+                  //               key={_id}
+                  //             >
+                  //               <p className="w-[20px] h-[20px] rounded-full bg-[#B6F6DE] text-center">
+                  //                 <TiTickOutline className="text-black m-auto" />
+                  //               </p>
+                  //               <div>
+                  //                 <h1 className="capitalize text-sm">
+                  //                   {title}
+                  //                 </h1>
+                  //                 <p className="text-sm opacity-[.5]">
+                  //                   video {duration} munites
+                  //                 </p>
+                  //               </div>
+                  //             </div>
+                  //           );
+                  //         }
+                  //       )}
+                  //     </div> */}
+                  //   </div>
+                  // </div>
+                );
+              })}
             </div>
           </>
         )}

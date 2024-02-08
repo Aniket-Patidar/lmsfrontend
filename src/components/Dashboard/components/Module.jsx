@@ -9,8 +9,8 @@ const Modules = ({ formData, setFormData }) => {
         {
           title: "Video title",
           description: "video description",
-          duration: 0,
-          videoUrl: "/uploads/lesson4.mp4",
+          duration: 50,
+          videoUrl: "/uploads/lesson2.mp4",
         },
       ],
     },
@@ -18,7 +18,6 @@ const Modules = ({ formData, setFormData }) => {
 
   useEffect(() => {
     setModules([...formData.modules, ...modules]);
-    console.log(formData.modules);
   }, []);
 
   const handleChange = (e, index) => {
@@ -65,15 +64,11 @@ const Modules = ({ formData, setFormData }) => {
   };
 
   const handleSubmit = () => {
-    setFormData({ ...formData, modules });
-    alert("submit");
-    console.log(formData);
+    setFormData((prevState) => {
+      return { ...prevState, modules };
+    });
+    console.log(formData,"handleSubmit");
   };
-
-  
-
-
-
 
   return (
     <div className="mt-3">

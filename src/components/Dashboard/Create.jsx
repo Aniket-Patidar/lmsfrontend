@@ -9,7 +9,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Course from "./Course";
 
-const Create = ({ err, isUpdate, course }) => {
+const Create = ({ err, isUpdate, course ,setShow}) => {
   const dispatch = useDispatch();
 
   const [formData, setFormData] = useState({
@@ -60,21 +60,16 @@ const Create = ({ err, isUpdate, course }) => {
         toast.success("course updated successfully");
       }
     } else {
-      setTimeout(() => {}, 5000);
       dispatch(
         createCourse({ ...formData, createdBy: localStorage.getItem("id") })
       );
+
       if (!error) {
-        toast.success("course created successfully");
+        toast.success("course Created successfully");
+        setShow("course");
       }
     }
   };
-
-  useEffect(() => {
-    if (error != null) {
-      err(error);
-    }
-  }, [error, handleSubmit]);
 
   return (
     <div className="text-white w-full items-center overflow-auto">
@@ -92,8 +87,6 @@ const Create = ({ err, isUpdate, course }) => {
         {currentPage == 2 && (
           <Modules formData={formData} setFormData={setFormData}></Modules>
         )}
-        {currentPage == 3 && <Highlights></Highlights>}
-        {currentPage == 4 && <Preview></Preview>}
       </div>
 
       <div className="flex gap-[35vw]">

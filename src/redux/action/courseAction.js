@@ -40,6 +40,7 @@ export const createCourse = (courseData) => async (dispatch) => {
         });
         dispatch(fetchCourses());
     } catch (error) {
+        console.log(error);
         dispatch(setError(error.response?.data?.message || "enter correct data"));
         dispatch(setError(error.message));
     }
