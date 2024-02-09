@@ -30,10 +30,22 @@ const CourseDetails = () => {
 
   useEffect(() => {
     if (!user) dispatch(getUserJwt());
-    const isEnrolled = user?.courses.some((course) => course._id === id);
-    setIsEnrolled(isEnrolled);
     dispatch(fetchByIdCourse(localStorage.getItem("currentID")));
   }, []);
+
+  useEffect(() => {
+    if (!course) return;
+    if (!user) dispatch(getUserJwt());
+
+    const index = course?.Enrolled?.findIndex((u) => {
+      return u._id == user?._id;
+    });
+
+    if (index != -1) {
+      setIsEnrolled(true);
+    }
+    
+  }, [course, dispatch, user]);
 
   useEffect(() => {
     if (error != undefined && error != null) {
@@ -45,7 +57,7 @@ const CourseDetails = () => {
 
   /* Razor Pay */
   const paymentHandler = async (e) => {
-    var amount = 500*60;
+    var amount = 500 * 60;
     var currency = "INR";
     var receiptId = "qwsaq1";
 
@@ -65,7 +77,6 @@ const CourseDetails = () => {
       }
     );
     const order = await response.json();
-    console.log(order);
 
     var options = {
       key: "rzp_test_nygA3vR5xQffUJ",
@@ -118,7 +129,8 @@ const CourseDetails = () => {
     });
     rzp1.open();
     e.preventDefault();
-    setIsEnrolled(true);
+    dispatch(getUserJwt());
+    dispatch(fetchByIdCourse(localStorage.getItem("currentID")));
   };
 
   return (
