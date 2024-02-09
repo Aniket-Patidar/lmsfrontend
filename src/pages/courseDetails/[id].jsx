@@ -81,7 +81,7 @@ const CourseDetails = () => {
         };
 
         const validateRes = await fetch(
-          `${process.env.NEXT_PUBLIC_REACT_APP_API_URL}/course/order/validate`,
+          `${process.env.NEXT_PUBLIC_REACT_APP_API_URL}/course/order/validate/${course._id}`,
           {
             method: "POST",
             body: JSON.stringify(body),
