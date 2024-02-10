@@ -83,7 +83,7 @@ const Lesson = () => {
   }
 
   return (
-    <div className="flex overflow-hidden h-[150vh] bg-[#101426] text-white relative">
+    <div className="flex  h-[150vh] bg-[#101426] text-white relative">
       {!user &&
         !course &&
         (loading2 ||
