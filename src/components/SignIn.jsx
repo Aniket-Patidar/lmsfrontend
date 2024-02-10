@@ -86,7 +86,7 @@ const SignIn = ({ setSign }) => {
         <div>
           <p className="font-semibold text-md">Email</p>
           <input
-            type="text"
+            type="email"
             placeholder="please enter your email id"
             className="border w-full px-2 py-1"
             onChange={(e) => {

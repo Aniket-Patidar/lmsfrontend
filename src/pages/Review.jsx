@@ -15,7 +15,7 @@ const Review = () => {
 
   const [reviewText, setReviewText] = useState("");
   const [id, setId] = useState("");
-  const [reviews, setReviews] = useState(null);
+  const [reviews, setReviews] = useState([]);
   const { user, loading: loading2 } = useSelector((e) => e.user);
   const [rating, setRating] = useState(0); // Initial value
 
@@ -23,12 +23,7 @@ const Review = () => {
     setId(router.query._id);
   }, [router.query]);
 
-  const {
-    courses,
-    course,
-    error,
-    loading: loading1,
-  } = useSelector((e) => e.course);
+  const { course, error, loading: loading1 } = useSelector((e) => e.course);
 
   useEffect(() => {
     dispatch(getUserJwt());
@@ -40,6 +35,13 @@ const Review = () => {
   };
 
   const handleSubmit = () => {
+  
+  
+    const filterArray = reviews.filter((rev) => {
+      return rev.user.id !== user._id;
+    });
+
+  
     if (reviewText.length < 15) {
       toast.warn("text more than 15 characters");
       return;
@@ -50,38 +52,24 @@ const Review = () => {
       return;
     }
 
-    // Check if the user already has a review for the current course
-    const existingReviewIndex = reviews.findIndex(
-      (review) => review.user.name === user.username
-    );
+    const review = {
+      user: {
+        name: user.name,
+        avatar: user.avatar,
+        id: user._id,
+      },
+      rating: rating,
+      comment: reviewText,
+    };
 
-    if (existingReviewIndex !== -1) {
-      // Update existing review
-      const updatedReviews = [...reviews];
-      updatedReviews[existingReviewIndex] = {
-        ...updatedReviews[existingReviewIndex],
-        rating: 5, // Update rating if needed
-        comment: reviewText, // Update comment
-      };
-      setReviews(updatedReviews);
-      const courseID = id;
-      //   dispatch(UpdateReview({ rating: 4, comment: reviewText, courseID }));
-      return;
-    } else {
-      // Add new review
-      const review = {
-        user: {
-          name: user.username,
-          avatar: user.avatar,
-        },
-        rating: rating,
-        comment: reviewText,
-      };
-      setReviews([...reviews, review]);
-      const courseID = id;
+   
 
-      dispatch(AddReview({ rating: 4, comment: reviewText, courseID }));
-    }
+    filterArray.push(review);
+    setReviews(filterArray);
+
+    const courseID = id;
+    dispatch(AddReview({ rating: 4, comment: reviewText, courseID }));
+    setReviewText("please enter review text");
   };
 
   useEffect(() => {
@@ -126,19 +114,22 @@ const Review = () => {
               </div>
             </div>
             {reviews &&
-              reviews.map((e) => (
-                <div className="w-[50%] mt-5 bg-gray-500 px-3 py-2 min-h-[100px]">
+              reviews.map((e, i) => (
+                <div
+                  className="w-[50%] mt-5 bg-gray-500 px-3 py-2 min-h-[100px]"
+                  key={i}
+                >
                   <div className="flex justify-between">
-                    <div>
+                    <div className="flex items-center gap-2">
                       <img
                         src={
-                          user.avatar
-                            ? `${process.env.NEXT_PUBLIC_REACT_APP_API_URL}/${user.avatar}`
+                          e?.user?.avatar
+                            ? `${process.env.NEXT_PUBLIC_REACT_APP_API_URL}/${e?.user?.avatar}`
                             : "./placeholder.webp"
                         }
                         className="w-[40px] h-[40px] rounded-full"
                       ></img>
-                      <p>{e.user?.username}</p>
+                      <p>{e.user?.name}</p>
                     </div>
                     <p className="flex items-center gap-1 text-sm">
                       <IoIosStar className="text-yellow-500" />

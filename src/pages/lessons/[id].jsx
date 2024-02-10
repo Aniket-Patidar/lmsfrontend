@@ -10,12 +10,15 @@ import Loader from "@/components/Loader";
 
 import ReactPlayer from "react-player/youtube";
 import MyImage from "@/components/LazyLoad";
-import { fetchByIdCourse } from "@/redux/action/courseAction";
+import { Answer, Question, fetchByIdCourse } from "@/redux/action/courseAction";
+import { CiEdit } from "react-icons/ci";
 
 // Only loads the YouTube player
 
 const Lesson = () => {
   const [show, setShow] = useState(false);
+  const [ques, setQues] = useState("Question");
+  const [QA, setQA] = useState([]);
   const [currentModule, setCurrentModule] = useState(0);
   const [showReview, setShowReview] = useState(false);
   const dispatch = useDispatch();
@@ -38,27 +41,62 @@ const Lesson = () => {
   }, [id]);
 
   useEffect(() => {
-    console.log(course?.modules);
+    if (course) {
+      setQA([...course.questions]);
+    }
   }, [course]);
 
-  return (
-    <div className="flex overflow-hidden h-[100vh] bg-[#101426] text-white relative">
-      {loading2 && (
-        <div className="w-full h-full flex justify-center items-center">
-          <Loader></Loader>
-        </div>
-      )}
+  const handelQue = (e, text) => {
+    if (e.key !== "Enter") return false;
+    setQA([...QA, { question: e.target.value }]);
+    dispatch(Question({ question: e.target.value, courseId: id }));
+    setQues("");
+  };
+  const [showIn, setShowIn] = useState(-1);
 
-      {loading1 && (
-        <div className="w-full h-full flex justify-center items-center">
-          <Loader></Loader>
-        </div>
-      )}
+  const handelAns = (e, id) => {
+    if (e.key !== "Enter") return false;
+
+    const index = QA.findIndex((item) => item._id === id);
+
+    if (index === -1) return;
+
+    const updatedQuestion = {
+      ...QA[index],
+      answer: e.target.value,
+    };
+
+    dispatch(
+      Answer({ answer: e.target.value, courseId: course._id, questionId: id })
+    );
+
+    const updatedQA = [...QA];
+    updatedQA[index] = updatedQuestion;
+
+    setQA(updatedQA);
+
+    setShowIn(-1);
+  };
+
+  function handelQA() {
+
+  }
+
+  return (
+    <div className="flex overflow-hidden h-[150vh] bg-[#101426] text-white relative">
+      {!user &&
+        !course &&
+        (loading2 ||
+          (loading1 && (
+            <div className="w-full h-full flex justify-center items-center">
+              <Loader></Loader>
+            </div>
+          )))}
 
       <>
         {course && (
           <>
-            <div className="left w-[75%]  overflow-scroll border-r-2">
+            <div className="left w-[75%]   overflow-scroll border-r-2">
               <div className="flex items-center  justify-between px-5">
                 <h1 className="capitalize bg-[#101426] text-white px-5 py-4 h-[50px] text-sm flex items-center">
                   <span>
@@ -94,30 +132,44 @@ const Lesson = () => {
                   </div>
                 )}
 
-                <div className="px-[35px] hidden">
+                <div className="px-[35px]">
                   <p className="py-2 text-lg font-semibold">Ask Question</p>
                   <input
                     type="text"
                     placeholder="ask questions...."
+                    onChange={(e) => setQues(e.target.value)}
+                    value={ques}
+                    onKeyDown={handelQue}
                     className="w-full px-1 py-1 text-black outline-none rounded-md"
                   />
+
                   <div className="my-2">
-                    <h1>Q what is full form of HTML ?</h1>
-                    <p className="text-sm capitalize">
-                      ANS : HYPER TEXT MARKUP LANGUAGE
-                    </p>
-                  </div>
-                  <div className="my-2">
-                    <h1>Q what is full form of HTML ?</h1>
-                    <p className="text-sm capitalize">
-                      ANS : HYPER TEXT MARKUP LANGUAGE
-                    </p>
-                  </div>
-                  <div className="my-2">
-                    <h1>Q what is full form of HTML ?</h1>
-                    <p className="text-sm capitalize">
-                      ANS : HYPER TEXT MARKUP LANGUAGE
-                    </p>
+                    {QA.map((elem, i) => {
+                      return (
+                        <div className="py-4">
+                          <div className="flex  items-center  gap-2" key={i}>
+                            <h1>Q {elem.question} ?</h1>
+                            <span>
+                            {user.role == 'user' &&  <CiEdit className="cursor-pointer"   onClick={() => setShowIn((e) => e == -1 ? i : -1)} />}
+                            </span>
+                          </div>
+                          <textarea
+                            type="text"
+                            className="w-[50%] min-h-[50px] bg-gray-500 py-2 px-3 rounded-lg"
+                            onKeyDown={(e) => handelAns(e, elem._id)}
+                            // value={elem.answer}
+                            style={{
+                              display: `${showIn == i ? "inline" : "none"}`,
+                            }}
+                          ></textarea>
+                          {elem.answer && showIn == -1 && (
+                            <p className="text-sm capitalize">
+                              ans:{elem.answer}
+                            </p>
+                          )}
+                        </div>
+                      );
+                    })}
                   </div>
                 </div>
                 <div></div>

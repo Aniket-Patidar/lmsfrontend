@@ -58,7 +58,7 @@ const allCourses = () => {
           {!loading &&
             courses &&
             courses.map(
-              ({ title, description, _id, thumbnailPoster, duration }) => {
+              ({ title, description, _id, thumbnailPoster, duration ,rating}) => {
                 return (
                   <div
                     key={_id}
@@ -75,7 +75,8 @@ const allCourses = () => {
                     <div className="flex justify-between text-[10px]">
                       <div className="flex items-center gap-1">
                         <FaStar className="text-c1" />
-                        <p>4.5</p>
+                        <p>{rating == 0 ? 2 : 4}</p>
+
                       </div>
                       <div className="flex items-center gap-1">
                         <FaClock className="text-black" />

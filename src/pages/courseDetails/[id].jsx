@@ -8,6 +8,7 @@ import axios from "axios";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
+import { FaIndianRupeeSign } from "react-icons/fa6";
 import { RiStarSFill } from "react-icons/ri";
 import { TiTickOutline } from "react-icons/ti";
 import { useDispatch, useSelector } from "react-redux";
@@ -44,7 +45,6 @@ const CourseDetails = () => {
     if (index != -1) {
       setIsEnrolled(true);
     }
-    
   }, [course, dispatch, user]);
 
   useEffect(() => {
@@ -57,7 +57,9 @@ const CourseDetails = () => {
 
   /* Razor Pay */
   const paymentHandler = async (e) => {
-    var amount = 500 * 60;
+    if (!course || !user) return;
+
+    var amount = course.price * 100;
     var currency = "INR";
     var receiptId = "qwsaq1";
 
@@ -128,6 +130,8 @@ const CourseDetails = () => {
       alert(response.error.metadata.payment_id);
     });
     rzp1.open();
+
+    console.log("done");
     e.preventDefault();
     dispatch(getUserJwt());
     dispatch(fetchByIdCourse(localStorage.getItem("currentID")));
@@ -219,16 +223,13 @@ const CourseDetails = () => {
                 />
                 {!isEnrolled ? (
                   <>
-                    <div className="flex items-center font-semibold my-[10px] gap-2">
-                      <p className="">{course.price}$</p>
-                      <p>69% off</p>
-                      <p>{course.duration} Minute</p>
-                    </div>
+                    <div className="flex items-center font-semibold my-[10px] gap-2"></div>
                     <button
-                      className="border border-red-300 px-4 py-2 rounded-full bg-red-500"
+                      className="border border-red-300 px-4 py-2 rounded-full bg-red-500 flex items-center gap-1"
                       onClick={paymentHandler}
                     >
-                      Buy now $2220
+                      Buy now <FaIndianRupeeSign className="text-sm" />{" "}
+                      <p>{course.price}</p>
                     </button>
                   </>
                 ) : (
@@ -239,9 +240,9 @@ const CourseDetails = () => {
                     start learning
                   </button>
                 )}
-                <p>
+                <p className="flex items-center">
                   <TiTickOutline className="inline-block" />
-                  keep learning
+                  <p>{course.duration} Minute</p>
                 </p>
                 <p>
                   <TiTickOutline className="inline-block" />

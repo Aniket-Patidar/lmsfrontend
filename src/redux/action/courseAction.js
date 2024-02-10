@@ -22,6 +22,7 @@ export const fetchByIdCourse = (id) => async (dispatch) => {
         }
         dispatch(setLoading());
         const response = await axios.get(`${basePath}/${id}`);
+        console.log(response.data);
         dispatch(setByIDCourse(response.data.course));
     } catch (error) {
         dispatch(setError(error.message));
@@ -97,6 +98,38 @@ export const AddReview = (data) => async (dispatch) => {
     try {
         dispatch(setLoading());
         await axios.post(`${basePath}/review`, data, {
+            headers: {
+                'authorization': localStorage.getItem('token'),
+            },
+        });
+    } catch (error) {
+        console.log(error, "Error");
+        dispatch(setError(error.response?.data));
+    }
+};
+
+
+
+
+export const Question = (data) => async (dispatch) => {
+    try {
+        dispatch(setLoading());
+        await axios.post(`${basePath}/question`, data, {
+            headers: {
+                'authorization': localStorage.getItem('token'),
+            },
+        });
+    } catch (error) {
+        console.log(error, "Error");
+        dispatch(setError(error.response?.data));
+    }
+};
+
+
+export const Answer = (data) => async (dispatch) => {
+    try {
+        dispatch(setLoading());
+        await axios.post(`${basePath}/answer`, data, {
             headers: {
                 'authorization': localStorage.getItem('token'),
             },

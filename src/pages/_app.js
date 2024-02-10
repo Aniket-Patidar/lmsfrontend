@@ -19,38 +19,35 @@ export default function App({ Component, pageProps }) {
 
   
 
-  useEffect(() => {
-    document.addEventListener('contextmenu', event => event.preventDefault());
-    document.onkeydown = function (e) {
-      if (event.keyCode === 123) {
-        return false;
-      }
-      if (e.ctrlKey && e.shiftKey && e.keyCode === 'I'.charCodeAt(0)) {
-        return false;
-      }
-      if (e.ctrlKey && e.shiftKey && e.keyCode === 'J'.charCodeAt(0)) {
-        return false;
-      }
-      if (e.ctrlKey && e.keyCode === 'U'.charCodeAt(0)) {
-        return false;
-      }
-    };
+  // useEffect(() => {
+  //   document.addEventListener('contextmenu', event => event.preventDefault());
+  //   document.onkeydown = function (e) {
+  //     if (event.keyCode === 123) {
+  //       return false;
+  //     }
+  //     if (e.ctrlKey && e.shiftKey && e.keyCode === 'I'.charCodeAt(0)) {
+  //       return false;
+  //     }
+  //     if (e.ctrlKey && e.shiftKey && e.keyCode === 'J'.charCodeAt(0)) {
+  //       return false;
+  //     }
+  //     if (e.ctrlKey && e.keyCode === 'U'.charCodeAt(0)) {
+  //       return false;
+  //     }
+  //   };
 
  
-    document.addEventListener('fullscreenchange', handleFullScreenChange);
+  //   document.addEventListener('fullscreenchange', handleFullScreenChange);
 
 
-    return () => {
-      document.removeEventListener('contextmenu', event => event.preventDefault());
-      document.onkeydown = null;
-    };
-  }, []);
+  //   return () => {
+  //     document.removeEventListener('contextmenu', event => event.preventDefault());
+  //     document.onkeydown = null;
+  //   };
+  // }, []);
 
 
 
-  function handleContextMenu(event) {
-    event.preventDefault();
-  }
   return <Provider store={store}>
     <Component {...pageProps} />
   </Provider>

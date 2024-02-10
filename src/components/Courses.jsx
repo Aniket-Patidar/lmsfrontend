@@ -35,7 +35,6 @@ const Courses = () => {
             </div>
           )}
 
-
           {!loading &&
             courses &&
             courses
@@ -47,7 +46,7 @@ const Courses = () => {
                   _id,
                   thumbnailPoster,
                   duration,
-                  ratings,
+                  rating,
                 }) => {
                   return (
                     <div
@@ -65,7 +64,7 @@ const Courses = () => {
                       <div className="flex justify-between text-[10px]">
                         <div className="flex items-center gap-1">
                           <FaStar className="text-c1" />
-                          <p>{ratings ? { ratings } : 5}</p>
+                          <p>{rating == 0 ? 2 : 4}</p>
                         </div>
                         <div className="flex items-center gap-1">
                           <FaClock className="text-black" />
